@@ -21,6 +21,8 @@ type SitemapEntry = {
 export const GET: APIRoute = ({ site }) => {
   const baseSite = site ?? new URL('https://example.com');
   const basePath = import.meta.env.BASE_URL || '/';
+  const normalizedBasePath = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  const siteRoot = new URL(normalizedBasePath, baseSite);
   const urls: SitemapEntry[] = [
     { path: '', priority: '1.0' },
     { path: 'work/', priority: '0.9' },
@@ -32,7 +34,7 @@ export const GET: APIRoute = ({ site }) => {
   ];
 
   const entries = urls.map((entry) => {
-    const loc = new URL(`${basePath}${entry.path}`, baseSite).toString();
+    const loc = new URL(entry.path, siteRoot).toString();
     const lastmod = entry.lastmod ? `<lastmod>${entry.lastmod}</lastmod>` : '';
     return `<url><loc>${escapeXml(loc)}</loc>${lastmod}<changefreq>monthly</changefreq><priority>${entry.priority}</priority></url>`;
   }).join('');

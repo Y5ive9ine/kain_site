@@ -14,9 +14,11 @@ function escapeXml(value: string) {
 export const GET: APIRoute = ({ site }) => {
   const baseSite = site ?? new URL('https://example.com');
   const basePath = import.meta.env.BASE_URL || '/';
-  const feedUrl = new URL(`${basePath}rss.xml`, baseSite).toString();
+  const normalizedBasePath = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  const siteRoot = new URL(normalizedBasePath, baseSite);
+  const feedUrl = new URL('rss.xml', siteRoot).toString();
   const items = posts.map((post) => {
-    const url = new URL(`${basePath}notes/${post.slug}/`, baseSite).toString();
+    const url = new URL(`notes/${post.slug}/`, siteRoot).toString();
     return `
       <item>
         <title>${escapeXml(post.title)}</title>
@@ -31,7 +33,7 @@ export const GET: APIRoute = ({ site }) => {
     <rss version="2.0">
       <channel>
         <title>Kain Yin Notes</title>
-        <link>${baseSite.toString()}</link>
+        <link>${siteRoot.toString()}</link>
         <description>关于产品、设计系统、前端和个人网站的文章。</description>
         <language>zh-CN</language>
         <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />
