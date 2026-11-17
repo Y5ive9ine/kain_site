@@ -12,9 +12,15 @@
 - `src/pages/index.astro`：首页。
 - `src/pages/work/index.astro`：作品列表页。
 - `src/pages/work/[slug].astro`：作品详情页模板。
+- `src/pages/notes/`：文章列表与文章详情页。
+- `src/pages/experiments/index.astro`：实验项目页。
+- `src/pages/now.astro`：Now 页面。
 - `src/data/projects.ts`：可扩展的作品内容模型和示例内容。
+- `src/data/posts.ts`、`src/data/experiments.ts`：文章与实验内容模型。
 - `src/components/`：布局、导航、项目卡片和视觉示意组件。
 - `src/styles/`：全局样式与构建时使用的令牌。
+- `src/pages/rss.xml.ts`、`src/pages/sitemap.xml.ts`、`src/pages/robots.txt.ts`：SEO、RSS 和爬虫入口。
+- `scripts/acceptance.mjs`：基于 Playwright 的生产预览验收脚本。
 - `dist/`：Astro 静态构建输出。
 
 ## 本地开发
@@ -33,6 +39,8 @@ npm run dev
 ```powershell
 npm run check
 npm run build
+npm run preview -- --host 127.0.0.1
+npm run test:browser
 ```
 
 ## GitHub Pages 部署
@@ -63,6 +71,8 @@ git push -u origin main
 $env:PUBLIC_SITE_URL = 'https://your-domain.example'
 npm run build
 ```
+
+也可以复制 `.env.example` 为 `.env`，再填入正式域名；GitHub Pages 工作流会自动注入项目站点地址和 `BASE_PATH`。
 
 ## 预览
 
