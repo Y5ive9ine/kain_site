@@ -1,0 +1,32 @@
+{
+  "color": {
+    "bg": { "light": "#f4f1ea", "dark": "#11100f" },
+    "surface": { "light": "#fffdf8", "dark": "#191715" },
+    "surfaceMuted": { "light": "#ebe7df", "dark": "#26221f" },
+    "text": { "light": "#151412", "dark": "#f5f1e9" },
+    "textMuted": { "light": "#6f6a60", "dark": "#aaa397" },
+    "border": { "light": "#d5cfc4", "dark": "#3b352f" },
+    "accent": { "light": "#ef633d", "dark": "#ff744d" },
+    "highlight": { "light": "#f2c84b", "dark": "#f5d36e" },
+    "success": "#2d8b64",
+    "danger": "#c94d48",
+    "info": "#2f6bb2"
+  },
+  "font": {
+    "sans": ["Inter", "PingFang SC", "Microsoft YaHei", "system-ui", "sans-serif"],
+    "display": ["Instrument Serif", "Noto Serif SC", "Georgia", "serif"],
+    "mono": ["IBM Plex Mono", "SFMono-Regular", "Consolas", "monospace"]
+  },
+  "typeScale": {
+    "xs": "clamp(.72rem, .68rem + .12vw, .78rem)",
+    "sm": "clamp(.82rem, .78rem + .14vw, .9rem)",
+    "md": "clamp(.98rem, .92rem + .2vw, 1.08rem)",
+    "lg": "clamp(1.25rem, 1.12rem + .5vw, 1.65rem)",
+    "xl": "clamp(1.8rem, 1.45rem + 1.2vw, 2.8rem)",
+    "hero": "clamp(3rem, 6vw, 7rem)"
+  },
+  "space": { "1": ".25rem", "2": ".5rem", "3": ".75rem", "4": "1rem", "5": "1.5rem", "6": "2rem", "7": "3rem", "8": "4rem", "9": "6rem", "10": "8rem" },
+  "radius": { "sm": ".375rem", "md": ".75rem", "lg": "1.25rem", "pill": "999px" },
+  "layout": { "containerMax": "80rem", "gutter": "clamp(1rem, 3vw, 3rem)", "headerHeight": "4.5rem" },
+  "motion": { "fast": "140ms", "base": "240ms", "slow": "560ms", "easeStandard": "cubic-bezier(.2, .65, .25, 1)" }
+}

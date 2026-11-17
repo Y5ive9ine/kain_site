@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+<BaseLayout title="Work — Kain Yin" description="Kain Yin 的作品与概念案例。">
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow">Work / Selected projects</p>
+      <h1>作品与<br />过程。</h1>
+      <p class="case-hero-description">每个项目都从一个具体的问题开始，经过结构、界面和实现，最后留下下一次可以继续的问题。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container projects-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

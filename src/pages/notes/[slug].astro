@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { posts, type Post } from '../../data/posts';
+import { sitePath } from '../../utils/site';
+
+interface Props {
+  post: Post;
+}
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+---
+<BaseLayout title={`${post.title} — Kain Yin`} description={post.excerpt}>
+  <article>
+    <header class="case-hero note-hero">
+      <div class="container">
+        <p class="eyebrow"><a href={sitePath('notes/')}>← Back to notes</a> · {post.date} · {post.readingTime}</p>
+        <h1>{post.title}</h1>
+        <p class="case-hero-description">{post.excerpt}</p>
+        <div class="tag-row">{post.tags.map((tag) => <span>{tag}</span>)}</div>
+      </div>
+    </header>
+    <div class="container article-layout">
+      <aside class="article-aside"><span>Notes / {post.date.slice(0, 4)}</span><span>Words for later</span></aside>
+      <div class="article-body">
+        {post.body.map((section, index) => (
+          <section class="article-section" id={`article-section-${index + 1}`}>
+            <p class="eyebrow">{String(index + 1).padStart(2, '0')}</p>
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))}
+        <a class="button secondary" href={sitePath('notes/')}>返回 Notes <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

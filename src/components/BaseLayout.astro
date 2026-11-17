@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import { sitePath } from '../utils/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  eyebrow?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Kain Yin — Product designer & builder',
+  description = 'Kain Yin 的个人作品集，记录产品设计、前端构建和正在形成的想法。',
+  eyebrow = 'KAIN / PERSONAL',
+  image = sitePath('og-image.svg'),
+  noindex = false
+} = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
+const socialImage = Astro.site ? new URL(image, Astro.site).toString() : image;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kain Yin',
+  url: canonical,
+  jobTitle: 'Product designer and front-end builder',
+  sameAs: []
+};
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Kain Yin" />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kain Yin" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <link rel="icon" href={sitePath('favicon.svg')} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Kain Yin Notes" href={sitePath('rss.xml')} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <title>{title}</title>
+    <script is:inline>
+      const savedTheme = localStorage.getItem('kain-theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <SiteHeader eyebrow={eyebrow} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      const themeToggles = document.querySelectorAll('[data-theme-toggle]');
+      const updateThemeLabel = () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        themeToggles.forEach((toggle) => {
+          toggle.setAttribute('aria-label', isDark ? '切换到浅色主题' : '切换到深色主题');
+          toggle.textContent = isDark ? 'Light' : 'Dark';
+        });
+      };
+      themeToggles.forEach((toggle) => toggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('kain-theme', nextTheme);
+        updateThemeLabel();
+      }));
+      updateThemeLabel();
+    </script>
+  </body>
+</html>

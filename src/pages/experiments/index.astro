@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { experiments } from '../../data/experiments';
+import { sitePath } from '../../utils/site';
+---
+<BaseLayout title="Experiments — Kain Yin" description="Kain Yin 的交互实验、原型和未完成项目。">
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow">Experiments / Small studies</p>
+      <h1>把未完成<br />也留下来。</h1>
+      <p class="case-hero-description">实验是把问题拆小、快速试一次的地方。它们可以是交互、内容、代码或一个还没有稳定答案的方向。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container experiment-list">
+      {experiments.map((experiment, index) => (
+        <article class="experiment-row">
+          <span class="experiment-index">{String(index + 1).padStart(2, '0')}</span>
+          <div class="experiment-main">
+            <p class="eyebrow">{experiment.type}</p>
+            <h2><a href={sitePath(experiment.href)}>{experiment.title}</a></h2>
+            <p>{experiment.description}</p>
+          </div>
+          <span class:list={['experiment-status', `status-${experiment.status.toLowerCase().replace(' ', '-')}`]}>{experiment.status}</span>
+          <a class="note-arrow" href={sitePath(experiment.href)} aria-label={`查看 ${experiment.title}`}>↗</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

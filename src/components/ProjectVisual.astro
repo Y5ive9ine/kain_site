@@ -1,0 +1,21 @@
+---
+import type { ProjectSection } from '../data/projects';
+
+interface Props {
+  section: ProjectSection;
+  accent: 'coral' | 'yellow' | 'blue';
+}
+
+const { section, accent } = Astro.props;
+---
+<div class:list={['case-visual', `visual-${accent}`, `visual-${section.visual ?? 'notes'}`]} aria-label={`${section.title} 视觉示意`}>
+  {section.visual === 'network' && (
+    <div class="visual-network"><span></span><span></span><span></span><span></span><i></i><i></i><i></i></div>
+  )}
+  {section.visual === 'console' && (
+    <div class="visual-console"><div class="visual-console-header"><b>today / focus</b><span>•••</span></div><div class="visual-console-row"><span></span><span></span><span></span></div><div class="visual-console-row medium"><span></span><span></span><span></span></div><div class="visual-console-row short"><span></span><span></span><span></span></div></div>
+  )}
+  {section.visual === 'notes' && (
+    <div class="visual-notes"><div></div><div></div><div></div><div></div><strong>keep<br />the thread</strong></div>
+  )}
+</div>

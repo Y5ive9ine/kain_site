@@ -1,0 +1,26 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+---
+<div class:list={['project-cover', `cover-${project.accent}`, { compact }]} aria-hidden="true">
+  <div class="cover-topline"><span>{project.index}</span><span>{project.tags[0]}</span></div>
+  {project.accent === 'coral' && (
+    <div class="cover-network">
+      <span class="cover-node node-a"></span><span class="cover-node node-b"></span><span class="cover-node node-c"></span>
+      <span class="cover-line line-a"></span><span class="cover-line line-b"></span><span class="cover-line line-c"></span>
+    </div>
+  )}
+  {project.accent === 'yellow' && (
+    <div class="cover-console"><span class="console-bar"></span><span class="console-bar short"></span><span class="console-chart"></span><span class="console-dot"></span></div>
+  )}
+  {project.accent === 'blue' && (
+    <div class="cover-notes"><span></span><span></span><span></span><span></span><b>NOTE<br />/ 03</b></div>
+  )}
+  <div class="cover-bottomline"><strong>{project.title}</strong><span>{project.year}</span></div>
+</div>

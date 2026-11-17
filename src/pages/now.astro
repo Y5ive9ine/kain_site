@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import { sitePath } from '../utils/site';
+---
+<BaseLayout title="Now — Kain Yin" description="Kain Yin 当前正在关注的项目、主题和工作状态。">
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow">Now / Updated 2026-11-17</p>
+      <h1>当前在<br />关注什么。</h1>
+      <p class="case-hero-description">这是一个会持续变化的页面，记录最近的工作重点、正在学习的东西和下一步想验证的问题。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container now-grid">
+      <article class="now-block"><p class="eyebrow">01 / Building</p><h2>把个人网站做成可以持续维护的内容系统。</h2><p>现在正在完善 Astro 的内容模型、RSS、Sitemap 和部署链路，让项目、文章和实验可以保持同一个入口。</p></article>
+      <article class="now-block"><p class="eyebrow">02 / Learning</p><h2>继续研究上下文和界面之间的关系。</h2><p>尤其关注复杂工具如何在不增加认知负担的情况下，让用户理解状态、关系和下一步动作。</p></article>
+      <article class="now-block"><p class="eyebrow">03 / Reading</p><h2>记录那些能改变工作方式的文章和产品。</h2><p>阅读列表会逐步迁移到 Notes，保留简短的摘要和对当前项目的影响。</p><a class="button secondary" href={sitePath('notes/')}>去 Notes <span aria-hidden="true">↗</span></a></article>
+      <article class="now-block"><p class="eyebrow">04 / Availability</p><h2><span class="status-dot"></span>Available for selected projects</h2><p>适合从模糊的问题开始，一起把目标、结构和第一个可验证版本做出来。</p><a class="button primary" href="mailto:hello@example.com">发邮件给我 <span aria-hidden="true">↗</span></a></article>
+    </div>
+  </section>
+</BaseLayout>

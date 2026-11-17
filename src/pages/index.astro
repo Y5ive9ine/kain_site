@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+import { sitePath } from '../utils/site';
+---
+<BaseLayout>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Product designer · Front-end builder</p>
+        <h1 id="hero-title">我设计并构建 <em>可被使用</em> 的数字产品。</h1>
+        <p class="hero-intro">从问题、结构到界面和代码，把复杂的想法整理成可以被理解、被使用、继续成长的体验。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">查看作品 <span aria-hidden="true">↓</span></a>
+          <a class="button secondary" href="mailto:hello@example.com">联系我 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="当前状态">
+        <p><span class="status-dot"></span>Available for selected projects</p>
+        <strong>设计系统、AI 产品和有清晰问题的工具。</strong>
+        <p>Based in Asia · Working across product, interface and front-end.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="work-title">Selected work</h2>
+        <a href={sitePath('work/')}>View all projects ↗</a>
+      </div>
+      <div class="projects-grid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="container split-section">
+      <div>
+        <p class="eyebrow">About / 01</p>
+        <h2 id="about-title">让复杂的东西变得可以开始。</h2>
+      </div>
+      <div class="split-copy">
+        <p>我关注产品如何从模糊的需求走到清晰的结构，再走到真实的使用场景。工作范围覆盖研究、信息架构、交互、视觉系统和前端实现。</p>
+        <p>这个网站也会记录正在形成的想法：项目拆解、设计判断、代码实验和那些还没有被命名的方向。</p>
+        <a class="button secondary" href="#contact">了解合作方式 <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="notes" aria-labelledby="notes-title">
+    <div class="container split-section">
+      <div>
+        <p class="eyebrow">Notes / 02</p>
+        <h2 id="notes-title">最近在想什么。</h2>
+        <a class="button secondary" href={sitePath('notes/')} style="margin-top: 1.25rem;">View all notes <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="split-copy">
+        <p class="muted">文章模块会继续接入 Markdown 内容源。第一版先保留结构，让首页具备可持续更新的入口。</p>
+        <div class="note-list" aria-label="最近文章">
+          <a class="note-item" href="#notes"><strong>把作品集写成一组可以继续阅读的判断</strong><span>2026 / 01</span></a>
+          <a class="note-item" href="#notes"><strong>设计系统应该保存哪些决定</strong><span>2025 / 12</span></a>
+          <a class="note-item" href="#notes"><strong>小型网站的内容模型</strong><span>2025 / 11</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container contact-block">
+      <h2 id="contact-title">有一个问题，<br /><em>可以一起做。</em></h2>
+      <div>
+        <p>如果你正在做一个需要被理清、被设计或被实现的产品，欢迎发邮件告诉我背景、目标和时间。</p>
+        <a class="button primary" href="mailto:hello@example.com">hello@example.com <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

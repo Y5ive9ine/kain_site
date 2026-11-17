@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro';
+import { posts } from '../../data/posts';
+import { sitePath } from '../../utils/site';
+---
+<BaseLayout title="Notes — Kain Yin" description="Kain Yin 关于产品、设计系统、前端和个人网站的文章。">
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow">Notes / Writing</p>
+      <h1>正在形成<br />的想法。</h1>
+      <p class="case-hero-description">写下产品、设计和实现过程中的判断，让它们有机会在下一次工作里继续发挥作用。</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container notes-list-page">
+      {posts.map((post, index) => (
+        <article class="note-list-card">
+          <div class="note-list-card-index">{String(index + 1).padStart(2, '0')}</div>
+          <div>
+            <p class="eyebrow">{post.date} · {post.readingTime}</p>
+            <h2><a href={sitePath(`notes/${post.slug}/`)}>{post.title}</a></h2>
+            <p>{post.excerpt}</p>
+            <div class="tag-row">{post.tags.map((tag) => <span>{tag}</span>)}</div>
+          </div>
+          <a class="note-arrow" href={sitePath(`notes/${post.slug}/`)} aria-label={`阅读 ${post.title}`}>↗</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
