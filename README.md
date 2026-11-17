@@ -85,6 +85,6 @@ Start-Process .\personal-site-wireframes.html
 ## 下一步实现顺序
 
 1. 用真实项目内容替换 `src/data/projects.ts` 中的示例案例。
-2. 把文章迁移到 Markdown/MDX 内容模型。
-3. 配置正式域名、RSS、Sitemap 和统计工具。
-4. 在生产托管平台配置构建命令 `npm run build`，发布目录为 `dist`。
+2. 文章内容稳定后，可迁移到 Astro Content Collections 或 Markdown/MDX。
+3. 配置正式域名和统计工具；RSS、Sitemap、robots 与 canonical 已经接入。
+4. 在生产托管平台继续使用构建命令 `npm run build`，发布目录为 `dist`。
