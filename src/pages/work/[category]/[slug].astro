@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../../components/BaseLayout.astro';
+import ProjectCover from '../../../components/ProjectCover.astro';
+import ProjectVisual from '../../../components/ProjectVisual.astro';
+import { projects, type Project } from '../../../data/projects';
+import { sitePath } from '../../../utils/site';
+
+interface Props { project: Project; }
+export function getStaticPaths() {
+  const aliases = [
+    { category: 'ai-agentic', slug: 'fetaui' },
+    { category: 'ai-agentic', slug: 'billdr' },
+    { category: 'ai-agentic', slug: 'chloe' },
+    { category: 'ai-agentic', slug: 'otera' },
+    { category: 'website', slug: 'nexscale-website', source: 'nexscale' },
+    { category: 'saas', slug: 'qpage' },
+    { category: 'saas', slug: 'weldica' }
+  ];
+  return aliases.map(({ category, slug, source }) => ({
+    params: { category, slug },
+    props: { project: projects.find((item) => item.slug === (source ?? slug))! }
+  }));
+}
+const { project } = Astro.props;
+const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+const nextProject = projects[(projectIndex + 1) % projects.length];
+---
+<BaseLayout title={`${project.title} — Kain Yin`} description={project.summary}>
+  <article>
+    <header class="case-hero"><div class="container">
+      <p class="eyebrow"><a href={sitePath('work/')}>← Back to work</a> · {project.eyebrow}</p>
+      <h1>{project.title}</h1>
+      <p class="case-hero-description">{project.description}</p>
+      <div class="case-meta" aria-label="项目元信息">
+        <div class="meta-item">Role<strong>{project.role}</strong></div>
+        <div class="meta-item">Year<strong>{project.year}</strong></div>
+        <div class="meta-item">Team<strong>{project.team}</strong></div>
+        <div class="meta-item">Tags<strong>{project.tags.join(' · ')}</strong></div>
+      </div>
+      <div class="case-cover"><ProjectCover project={project} /></div>
+    </div></header>
+    <div class="container case-layout">
+      <nav class="case-index" aria-label="案例目录">
+        {project.sections.map((section, index) => <a href={`#section-${index + 1}`}>{section.label}</a>)}
+      </nav>
+      <div>
+        {project.sections.map((section, index) => (
+          <section class="case-section" id={`section-${index + 1}`} aria-labelledby={`section-title-${index + 1}`}>
+            <p class="eyebrow">{section.label}</p><h2 id={`section-title-${index + 1}`}>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <ProjectVisual section={section} accent={project.accent} />
+          </section>
+        ))}
+        <section class="case-section" id="agent-view" aria-labelledby="agent-view-title">
+          <p class="eyebrow">Agent view</p>
+          <h2 id="agent-view-title">Agent view</h2>
+          <p>Every important decision remains readable, reviewable, and useful to the people and tools that carry the work forward.</p>
+          <ProjectVisual section={{ label: 'Agent view', title: 'Agent view', paragraphs: ['Readable product context keeps the next action clear.'], visual: 'notes' }} accent={project.accent} />
+        </section>
+        <nav class="case-next" aria-label="项目导航">
+          <a href={sitePath(`work/${previousProject.slug}/`)}><span>Previous project</span><strong>← {previousProject.title}</strong></a>
+          <a href={sitePath(`work/${nextProject.slug}/`)}><span>Next project</span><strong>{nextProject.title} →</strong></a>
+        </nav>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+

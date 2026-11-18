@@ -69,16 +69,20 @@ const jsonLd = {
     </main>
     <SiteFooter />
     <aside class="cookie-banner" data-cookie aria-label="Cookie preferences">
-      <strong>Cookies</strong>
+      <h2>Cookies</h2>
       <p>我只使用必要的存储来记住主题和菜单状态。</p>
       <div>
         <button type="button" data-cookie-decline>Decline</button>
         <button type="button" class="dark" data-cookie-accept>Accept</button>
       </div>
     </aside>
-    <button class="chat-fab" type="button" data-chat aria-label="打开关于 Kain 的面板">◔</button>
+    <button class="chat-fab" type="button" data-chat aria-label="Ask about Pouya" aria-expanded="false" aria-controls="chat-panel">Ask about Pouya</button>
     <script>
       const themeToggles = document.querySelectorAll('[data-theme-toggle]');
+      const siteHeader = document.querySelector<HTMLElement>('.site-header');
+      const revealHeader = () => siteHeader?.classList.toggle('is-revealed', window.scrollY > 24);
+      window.addEventListener('scroll', revealHeader, { passive: true });
+      revealHeader();
       const updateThemeLabel = () => {
         const isDark = document.documentElement.dataset.theme === 'dark';
         themeToggles.forEach((toggle) => {
@@ -97,6 +101,7 @@ const jsonLd = {
       const popovers = [...document.querySelectorAll<HTMLElement>('[data-popover]')];
       const menuButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-menu]')];
       const chatPanel = document.querySelector<HTMLElement>('[data-chat-panel]');
+      const chatTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-chat]')];
       const mobileNav = document.querySelector<HTMLDetailsElement>('[data-mobile-nav]');
       const mobileSummary = document.querySelector<HTMLElement>('[data-mobile]');
       const closePopovers = () => {
@@ -112,12 +117,15 @@ const jsonLd = {
         target.hidden = !shouldOpen;
         button.setAttribute('aria-expanded', String(shouldOpen));
       }));
-      document.querySelectorAll<HTMLElement>('[data-chat]').forEach((trigger) => trigger.addEventListener('click', (event) => {
+      const syncChatState = (open: boolean) => {
+        chatTriggers.forEach((trigger) => trigger.setAttribute('aria-expanded', String(open)));
+      };
+      chatTriggers.forEach((trigger) => trigger.addEventListener('click', (event) => {
         event.stopPropagation();
         if (!chatPanel) return;
         const shouldOpen = chatPanel.hidden;
         chatPanel.hidden = !shouldOpen;
-        trigger.setAttribute('aria-expanded', String(shouldOpen));
+        syncChatState(shouldOpen);
         closePopovers();
         if (mobileNav) mobileNav.open = false;
       }));
@@ -126,6 +134,7 @@ const jsonLd = {
         if (!target.closest('.desktop-nav, .desktop-popover, .chat-panel, .chat-fab')) {
           closePopovers();
           if (chatPanel) chatPanel.hidden = true;
+          syncChatState(false);
         }
       });
       mobileNav?.addEventListener('toggle', () => {

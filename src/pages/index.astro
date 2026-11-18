@@ -3,9 +3,9 @@ import BaseLayout from '../components/BaseLayout.astro';
 import ProjectCover from '../components/ProjectCover.astro';
 import { projects } from '../data/projects';
 import { experiments } from '../data/experiments';
-import { sitePath } from '../utils/site';
+import { projectPath, sitePath } from '../utils/site';
 
-const workFilters = ['All', 'Research', 'Systems', 'SaaS', 'Publishing'];
+const workFilters = ['All', 'AI and Agentics', 'Websites', 'SaaS', 'Mobile App', 'Design System'];
 const stackItems = ['Product strategy', 'User research', 'Interaction design', 'Design systems', 'React', 'TypeScript', 'Astro', 'Prototyping', 'AI workflows', 'Front-end engineering'];
 ---
 
@@ -14,7 +14,7 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
     <div class="container home-hero-inner">
       <div class="home-hero-copy">
         <p class="eyebrow">Technical product designer</p>
-        <h1 id="hero-title">I design and build <span>useful systems.</span></h1>
+        <h1 id="hero-title"><span class="hero-title-desktop">Seasoned UX Designer</span><span class="hero-title-tablet">Experienced Product<br />Manager</span><span class="hero-title-mobile">AI Product<br />Builder</span></h1>
         <p class="home-hero-description">从用户问题、产品结构到可用界面和真实代码，把复杂想法变成可以被理解、使用和继续成长的产品。</p>
         <div class="hero-actions">
           <a class="button secondary" href="#about">About me <span aria-hidden="true">↓</span></a>
@@ -33,11 +33,10 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
         <div class="avatar-spark spark-one"></div><div class="avatar-spark spark-two"></div>
       </div>
       <div class="hero-note">
-        <p class="eyebrow">Hi, I’m Kain</p>
-        <p>我在产品、设计系统和 AI 工具之间工作，喜欢把模糊问题整理成可以继续行动的界面。</p>
-        <button class="hero-trigger" type="button" data-hero-chat data-message="我会把研究、结构、交互和代码放在同一个工作流里。" aria-expanded="false">I design and build interfaces <span aria-hidden="true">↗</span></button>
-        <p>从用户发现到真实交付，让每一步都更容易理解和继续。</p>
-        <button class="hero-trigger" type="button" data-hero-chat data-message="产品设计和前端工程一起工作，能让决策更快被验证。" aria-expanded="false">Product design and front-end engineering <span aria-hidden="true">↗</span></button>
+        <p class="eyebrow">Hi, I’m Pouya</p>
+        <button class="hero-trigger" type="button" data-hero-chat data-message="我会把研究、结构、交互和代码放在同一个工作流里。" aria-expanded="false">I design and build interfaces</button>
+        <p>Craft AI and SaaS products (Mobile, Desktop, and Web) from the pulse of user needs to the forefront of technology.</p>
+        <button class="hero-trigger" type="button" data-hero-chat data-message="产品设计和前端工程一起工作，能让决策更快被验证。" aria-expanded="false">Product design and front-end engineering</button>
         <div class="hero-chat" data-hero-chat-panel hidden role="status" aria-live="polite"></div>
       </div>
     </div>
@@ -45,9 +44,9 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
 
   <section class="logo-strip" aria-label="Areas of practice">
     <div class="container logo-strip-inner">
-      <span>Led by curiosity</span>
+      <span>Led impactful initiatives at</span>
       <div class="logo-strip-items" aria-hidden="true">
-        <b>UX</b><b>AI</b><b>UI</b><b>PM</b><b>WEB</b><b>SYS</b><b>UX</b><b>AI</b>
+        <b>ROCKET</b><b>LG</b><b>▶</b><b> B</b><b>✣</b><b>↟</b>
       </div>
     </div>
   </section>
@@ -55,13 +54,13 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
   <section class="home-section interface-section" aria-labelledby="interface-title">
     <div class="container">
       <p class="eyebrow">Interface studies</p>
-      <h2 id="interface-title">Designed from user discovery, shaped into calm interfaces.</h2>
+      <h2 id="interface-title">Designed components and products directly rooted in user discovery, bridging raw customer insights with intuitive UI/UX and core functional requirements.</h2>
       <div class="interface-gallery" aria-label="Interface study previews">
-        <article class="interface-card interface-receipt"><span>01 / Receipt printer</span><div class="receipt-lines"></div><strong>$18.58</strong></article>
-        <article class="interface-card interface-gauge"><span>02 / Liquid gauge</span><div class="gauge-ring">72%</div><small>35.8 GB free</small></article>
-        <article class="interface-card interface-code"><span>03 / OTP vault</span><strong>••••••••</strong><small>Paste your code to continue</small></article>
-        <article class="interface-card interface-chart"><span>04 / Line forecast</span><div class="forecast-line"></div></article>
-        <article class="interface-card interface-bars"><span>05 / Daily activity</span><div class="activity-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="interface-card interface-receipt"><span>01 / Receipt printer</span><h3>Feta Coffee</h3><div class="receipt-lines"></div><strong>$18.58</strong></article>
+        <article class="interface-card interface-gauge"><span>02 / Liquid gauge</span><h3>Storage</h3><div class="gauge-ring">72%</div><small>35.8 GB free</small></article>
+        <article class="interface-card interface-code"><span>03 / OTP vault</span><h3>Enter the code</h3><strong>••••••••</strong><small>Paste your code to continue</small></article>
+        <article class="interface-card interface-chart"><span>04 / Line forecast</span><h3>At this pace you reach the budget on Sep 26</h3><div class="forecast-line"></div></article>
+        <article class="interface-card interface-bars"><span>05 / Daily activity</span><h3>ACME · Daily</h3><div class="activity-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
       </div>
     </div>
   </section>
@@ -85,20 +84,20 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
       <div class="case-list" data-case-list>
         {projects.map((project) => (
           <article class="case-card" data-case-card data-tags={project.tags.join('|')}>
-            <div class="case-card-header">
-              <div><p class="eyebrow">{project.tags.join(' · ')}</p><h3>{project.title}. {project.description}</h3></div>
+            <header class="case-card-header">
+              <div><p class="eyebrow">{project.eyebrow}</p><h3>{project.title}. {project.description}</h3></div>
               <span class="case-year">{project.year}</span>
-            </div>
+            </header>
             <div class="case-card-main">
-              <a class="case-card-media" href={sitePath(`work/${project.slug}/`)} aria-label={`Learn more about ${project.title}`}><ProjectCover project={project} compact /></a>
+              <a class="case-card-media" href={projectPath(project.slug)} aria-label={`Learn more about ${project.title}`}><ProjectCover project={project} compact /></a>
               <div class="case-card-summary">
                 <p>{project.summary}</p>
                 <dl><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Team</dt><dd>{project.team}</dd></div></dl>
-                <a class="learn-link" href={sitePath(`work/${project.slug}/`)}>Learn more <span aria-hidden="true">↗</span></a>
+                <a class="learn-link" href={projectPath(project.slug)}>Learn more <span aria-hidden="true">↗</span></a>
               </div>
             </div>
             <div class="case-insights">
-              {project.sections.map((section, index) => <div class="insight-card"><span>{String(index + 1).padStart(2, '0')}</span><strong>{section.title}</strong><p>{section.paragraphs[0]}</p></div>)}
+              {project.sections.slice(0, 4).map((section, index) => <div class="insight-card"><span>{String(index + 1).padStart(2, '0')}</span><strong>{section.title}</strong><p>{section.paragraphs[0]}</p></div>)}
             </div>
           </article>
         ))}
@@ -162,6 +161,20 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
   viewButtons.forEach((button) => button.addEventListener('click', () => { viewButtons.forEach((item) => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-checked', String(active)); }); list?.setAttribute('data-view', button.dataset.view || 'showcase'); }));
   const chatTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-hero-chat]')];
   const chatPanel = document.querySelector<HTMLElement>('[data-hero-chat-panel]');
+  const syncHeroStates = () => {
+    const mobile = window.matchMedia('(max-width: 800px)').matches;
+    const [designTrigger, engineeringTrigger] = chatTriggers;
+    if (designTrigger) {
+      if (mobile) designTrigger.setAttribute('aria-expanded', 'false');
+      else designTrigger.removeAttribute('aria-expanded');
+    }
+    if (engineeringTrigger) {
+      if (mobile) engineeringTrigger.removeAttribute('aria-expanded');
+      else engineeringTrigger.setAttribute('aria-expanded', 'false');
+    }
+  };
+  syncHeroStates();
+  window.matchMedia('(max-width: 800px)').addEventListener('change', syncHeroStates);
   chatTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
     const isOpen = trigger.getAttribute('aria-expanded') === 'true';
     chatTriggers.forEach((item) => item.setAttribute('aria-expanded', String(item === trigger && !isOpen)));

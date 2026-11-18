@@ -1,6 +1,16 @@
 import type { APIRoute } from 'astro';
-import { projects } from '../data/projects';
+import { personalProjects, projects } from '../data/projects';
 import { posts } from '../data/posts';
+
+const pouloRoutes = [
+  'work/ai-agentic/fetaui/',
+  'work/ai-agentic/billdr/',
+  'work/ai-agentic/chloe/',
+  'work/ai-agentic/otera/',
+  'work/website/nexscale-website/',
+  'work/saas/qpage/',
+  'work/saas/weldica/'
+];
 
 function escapeXml(value: string) {
   return value.replace(/[<>&'\"]/g, (character) => ({
@@ -29,7 +39,8 @@ export const GET: APIRoute = ({ site }) => {
     { path: 'notes/', priority: '0.8' },
     { path: 'experiments/', priority: '0.7' },
     { path: 'now/', priority: '0.6' },
-    ...projects.map((project) => ({ path: `work/${project.slug}/`, priority: '0.8' })),
+    ...[...projects, ...personalProjects].map((project) => ({ path: `work/${project.slug}/`, priority: '0.8' })),
+    ...pouloRoutes.map((path) => ({ path, priority: '0.8' })),
     ...posts.map((post) => ({ path: `notes/${post.slug}/`, priority: '0.7', lastmod: post.date }))
   ];
 

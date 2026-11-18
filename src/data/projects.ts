@@ -20,7 +20,7 @@ export type Project = {
   sections: ProjectSection[];
 };
 
-export const projects: Project[] = [
+const kainProjects: Project[] = [
   {
     slug: 'context-atlas',
     index: '01',
@@ -213,6 +213,95 @@ export const projects: Project[] = [
     ]
   }
 ];
+
+export const personalProjects = kainProjects;
+
+const pouloReference = [
+  {
+    slug: 'fetaui', title: 'fetaUI', description: 'An animated design system that agents can read.', eyebrow: '#AIandAgentics #DesignSystem', summary: 'I designed, built and shipped an open source animated icon and UI library on my own: 5,987 icons in 10 styles, 347 components with motion, and an MCP server so coding agents use the real thing.', tags: ['AI and Agentics', 'Design System'], role: 'Founder, Designer and Developer', year: '2026', team: 'Open source', accent: 'blue' as const
+  },
+  {
+    slug: 'billdr', title: 'Billdr AI', description: 'Redesigning how crews run their day on site.', eyebrow: '#AIandAgentics #MobileApp', summary: "I led the design of Billdr's first mobile app for general contractors and their crews, from field research to a cross platform design system and a validated MVP.", tags: ['AI and Agentics', 'Mobile App', 'SaaS'], role: 'Lead Product Designer', year: '2026', team: 'Billdr', accent: 'blue' as const
+  },
+  {
+    slug: 'chloe', title: 'Chloe', description: 'Designing an agentic AI operator that does the retention work so studio owners don’t have to.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I designed the surfaces where studio owners meet Chloe: connecting their CRM, reading the business at a glance, and talking to an AI that acts on what it sees, on web and on the floor.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Lead Product Designer', year: '2026', team: 'Chloe', accent: 'yellow' as const
+  },
+  {
+    slug: 'otera', title: 'Otera AI', description: 'Designing the trust layer for enterprise AI, so people could check, correct and teach the model.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I led product design for a Series A platform that automates back office documents with in house models and LLMs. I owned the design discipline, the design system and features like HITL, AI Coworker and pre processing.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Founding Product Designer', year: '2023–25', team: 'Otera', accent: 'coral' as const
+  },
+  {
+    slug: 'nexscale', title: 'NexScale website', description: 'From taste debate to triage.', eyebrow: '#Website', summary: 'I audited the live site, wrote the case for change, repositioned the product and shipped a redesigned site on Framer. I owned it end to end in one week.', tags: ['Websites'], role: 'Web Designer and Developer', year: '2026', team: 'NexScale', accent: 'yellow' as const
+  },
+  {
+    slug: 'qpage', title: 'QPage', description: 'Making the talent pool something recruiters could actually reach.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'As cofounder and CPO, I led product and design for an AI ATS and CRM built to make tech hiring faster, fairer and data driven.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Cofounder, CPO', year: '2023–25', team: 'QPage', accent: 'blue' as const
+  },
+  {
+    slug: 'weldica', title: 'Weldica', description: 'Turning compliance paperwork into a guided conversation.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I designed a web app that automates welding procedure qualification. A conversational assistant guides supervisors from first inquiry to final approval, against CSA W47.1 and AWS D1.1.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Product Designer', year: '2026', team: 'Weldica', accent: 'coral' as const
+  }
+];
+
+// The reference projects use a longer editorial rhythm on their detail pages.
+// Keeping these headings in the content model lets the shared case template
+// expose the same navigation and section cadence without coupling layout to a
+// particular project.
+const pouloSections: Record<string, ProjectSection[]> = {
+  fetaui: [
+    ['Problem', 'Interfaces are often assembled from parts that were never made to work together. The project starts by making the system legible: one source, shared rules, and a reviewable path from idea to component.'],
+    ['Approach', 'One system, drawn once, generated everywhere, and readable by people and agents alike. Rules make the set coherent while leaving room for expression.'],
+    ['Procedure', 'A small set of repeatable steps keeps the work moving: specify, draw, generate, review, and ship.'],
+    ['Native to agents', 'An agent should never have to guess a prop. Every component carries a readable description, source, and example.'],
+    ['Motion', 'Every component moves with intention. Shared springs and reduced-motion rules keep interaction calm.'],
+    ['Under the hood', 'Tokens, transforms, and simple documentation make the system maintainable as it grows.'],
+    ['Reflection', 'The bottleneck moved from making to deciding. Clear specs and review gates made the work faster and more trustworthy.']
+  ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'notes' })),
+  billdr: [
+    ['Problem', 'Construction projects generate chaos, not just buildings. Teams contend with scattered communication, manual admin, and delayed logs.'],
+    ['Research', 'Looking beyond speculation, we reviewed workflows and interviewed people who manage projects and field work.'],
+    ['What we learned', 'The hardest part was uncertainty. Crews needed the next action and its context at a glance, without digging through screens.'],
+    ['Ideation', 'We turned research into concrete directions: priority tasks, shifts, and next steps available without digging through screens.'],
+    ['Design', 'A cross-platform system brought the same hierarchy to mobile and web, with voice and glanceable states for people on site.'],
+    ['Lessons', 'The product became easier to trust when the interface showed what would happen next and kept the most common action close.'],
+    ['Agent view', 'A voice-first assistant turns a field update into a clear task while preserving the original words and project context.']
+  ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'console' })),
+  chloe: [
+    ['Context', 'A small team needed an operator that could turn scattered signals into clear next steps without adding another dashboard to manage.'],
+    ['Goal', 'Give studio owners a calm view of the business and a direct path from a signal to an action.'],
+    ['My role', 'I framed the product, designed the system, wrote the interface copy, and worked with engineering through the first release.'],
+    ['Iteration', 'Short feedback loops kept the team close to real member conversations and the details between a prompt and a decision.'],
+    ['Onboarding', 'Seven steps carry an owner from a cold landing to a live CRM, with every error state explained.'],
+    ['One flow, two canvases', 'The same model works on a desk and a phone. The hierarchy stays steady while controls adapt to the available space.'],
+    ['States, not just screens', 'Boards carry the parts that decide whether a task finishes: reminders, weak passwords, expired codes, and the small details between.'],
+    ['Dashboard', 'The dashboard starts with today’s focus, members at risk, visits, and a clear next action.'],
+    ['Conversation', 'Prompt starters reflect an owner’s week and turn long analysis into a document that can be acted on.'],
+    ['Ask Chloe', 'A focused prompt lets an owner ask for a useful decision without learning a new reporting language.'],
+    ['Multi branch analysis', 'Branching questions preserve the evidence behind a recommendation and make the path reviewable.'],
+    ['Executive Summary', 'A short summary turns the most important signals into a shareable update.'],
+    ['Business Pulse', 'The pulse view keeps visits, members, and retention trends in one calm surface.'],
+    ['Community Vibe', 'Qualitative feedback sits alongside the numbers so context is not lost.']
+  ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'network' })),
+  otera: [
+    ['Overview', 'A generative automation platform streamlined back-office processes by integrating models with the tools and workflows teams already use.'],
+    ['Product', 'The trust layer brings confidence, review, and correction into one document workflow so teams can move without surrendering control.'],
+    ['What I did', 'I led product design, the design system, and features such as human review, AI Coworker, and pre-processing.'],
+    ['Tools and technologies', 'Research, journey maps, prototypes, and a shared component language made complex model behaviour easier to explain.'],
+    ['Primary user group persona', 'Operations teams need clear status, a human checkpoint, and a reliable record when a model changes a document.'],
+    ['Process', 'We adapted a double-diamond process: understand, frame, make, and learn, with room for the nonlinear reality of product work.'],
+    ['Our process', 'Trust grew when the interface explained status, surfaced uncertainty, and let people correct the model.'],
+    ['Our non-linear process reality', 'Research, design, and delivery looped as new evidence changed the shape of the problem.'],
+    ['Design system development process', 'Shared tokens and components kept every review state consistent as the product expanded.'],
+    ['Feature design discovery process', 'Feature work began with a clear question, a prototype, and a testable decision.'],
+    ['User journey map', 'The journey map made every handoff visible from intake to approval.'],
+    ['User research synthesis', 'Themes from interviews became signals the product could explain and act on.'],
+    ['Usability tests', 'Short sessions exposed where confidence and control needed to be clearer.'],
+    ['SUS', 'A lightweight usability measure gave the team a shared baseline for iteration.']
+  ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'network' }))
+};
+
+export const projects: Project[] = pouloReference.map((reference, index) => ({
+  ...kainProjects[index],
+  ...reference,
+  sections: pouloSections[reference.slug] ?? kainProjects[index].sections
+}));
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);

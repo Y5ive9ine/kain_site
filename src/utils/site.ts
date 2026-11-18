@@ -7,3 +7,10 @@ export function sitePath(path = '') {
   if (normalizedPath.startsWith('#')) return `${normalizedBase}${normalizedPath}`;
   return `${normalizedBase}${normalizedPath}`;
 }
+
+export function projectPath(slug: string, reference = true) {
+  if (!reference) return sitePath(`work/${slug}/`);
+  if (slug === 'nexscale') return sitePath('work/website/nexscale-website/');
+  if (slug === 'qpage' || slug === 'weldica') return sitePath(`work/saas/${slug}/`);
+  return sitePath(`work/ai-agentic/${slug}/`);
+}

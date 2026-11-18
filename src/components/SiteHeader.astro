@@ -3,41 +3,42 @@ interface Props {
   eyebrow?: string;
 }
 
-import { sitePath } from '../utils/site';
+import { projectPath, sitePath } from '../utils/site';
 import { projects } from '../data/projects';
 
 const { eyebrow = 'KAIN / PERSONAL' } = Astro.props;
 ---
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container header-inner">
     <a class="brand" href={sitePath()} aria-label="返回首页">{eyebrow}</a>
     <nav class="desktop-nav" aria-label="主导航">
       <a class="nav-item" href={sitePath()}>Home</a>
-      <button class="nav-item nav-menu-trigger" type="button" data-menu="work" aria-expanded="false" aria-controls="work-popover">Work <span aria-hidden="true">⌄</span></button>
-      <button class="nav-item nav-menu-trigger" type="button" data-menu="experiments" aria-expanded="false" aria-controls="experiments-popover">Experiments <span aria-hidden="true">⌄</span></button>
-      <button class="nav-item" type="button" data-chat aria-label="Hi, I’m Kain" aria-expanded="false" aria-controls="chat-panel">About</button>
+      <button class="nav-item nav-menu-trigger" type="button" data-menu="work" aria-expanded="false" aria-controls="work-popover">Work</button>
+      <button class="nav-item nav-menu-trigger" type="button" data-menu="experiments" aria-expanded="false" aria-controls="experiments-popover">Experiments</button>
+      <button class="nav-item nav-about" type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel"></button>
       <a href={sitePath('#stack')}>Stack</a>
       <a class="header-cta" href="mailto:hello@example.com">Book a call ↗</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
     </nav>
     <details class="mobile-nav" data-mobile-nav>
-      <summary data-mobile aria-label="Open menu" aria-controls="mobile-sheet" aria-expanded="false">Menu</summary>
+      <summary data-mobile role="button" aria-label="Open menu" aria-controls="mobile-sheet" aria-expanded="false">Open menu</summary>
       <nav id="mobile-sheet" data-sheet aria-label="移动端导航">
         <a href={sitePath()}>Home</a>
         <a href={sitePath('#work')}>Work</a>
         <a href={sitePath('#experiments')}>Experiments</a>
-        <button type="button" data-chat aria-label="Hi, I’m Kain" aria-expanded="false" aria-controls="chat-panel">About</button>
+        <button type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel">Hi, I’m Pouya</button>
         <a href={sitePath('#stack')}>Stack</a>
         <a href="mailto:hello@example.com">Book a call ↗</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
       </nav>
     </details>
+    <button class="mobile-about" type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel"></button>
   </div>
   <div class="desktop-popover" id="work-popover" data-popover="work" hidden>
     <div class="popover-main">
       <p class="eyebrow">CASE STUDIES</p>
       <div class="work-list">
-        {projects.map((project) => <a href={sitePath(`work/${project.slug}/`)}><strong>{project.title}</strong><span>{project.eyebrow}</span></a>)}
+        {projects.map((project) => <a href={projectPath(project.slug)}><strong>{project.title}</strong><span>{project.eyebrow}</span></a>)}
       </div>
     </div>
     <footer><span>{projects.length} case studies</span><a href={sitePath('#work')}>Browse all work ↗</a></footer>

@@ -2,7 +2,7 @@
 import BaseLayout from '../../components/BaseLayout.astro';
 import ProjectCover from '../../components/ProjectCover.astro';
 import ProjectVisual from '../../components/ProjectVisual.astro';
-import { projects, type Project } from '../../data/projects';
+import { personalProjects, projects, type Project } from '../../data/projects';
 import { sitePath } from '../../utils/site';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function getStaticPaths() {
-  return projects.map((project) => ({
+  return [...projects, ...personalProjects].map((project) => ({
     params: { slug: project.slug },
     props: { project }
   }));
