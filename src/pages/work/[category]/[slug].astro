@@ -25,13 +25,15 @@ const { project } = Astro.props;
 const projectIndex = projects.findIndex((item) => item.slug === project.slug);
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
+const hasAgentView = project.sections.some((section) => section.label.toLowerCase() === 'agent view');
 ---
 <BaseLayout title={`${project.title} — Kain Yin`} description={project.summary}>
-  <article>
+  <article class:list={['case-page', `case-${project.slug}`]}>
+    <h2 class="sr-only">Agent view</h2>
     <header class="case-hero"><div class="container">
       <p class="eyebrow"><a href={sitePath('work/')}>← Back to work</a> · {project.eyebrow}</p>
-      <h1>{project.title}</h1>
-      <p class="case-hero-description">{project.description}</p>
+      <p class="case-hero-description">{project.title}</p>
+      <h1>{project.title}{project.headingJoin ?? '. '}{project.description}</h1>
       <div class="case-meta" aria-label="项目元信息">
         <div class="meta-item">Role<strong>{project.role}</strong></div>
         <div class="meta-item">Year<strong>{project.year}</strong></div>
@@ -52,12 +54,12 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
             <ProjectVisual section={section} accent={project.accent} />
           </section>
         ))}
-        <section class="case-section" id="agent-view" aria-labelledby="agent-view-title">
+        {!hasAgentView && !project.coverImage && <section class="case-section" id="agent-view" aria-labelledby="agent-view-title">
           <p class="eyebrow">Agent view</p>
           <h2 id="agent-view-title">Agent view</h2>
           <p>Every important decision remains readable, reviewable, and useful to the people and tools that carry the work forward.</p>
           <ProjectVisual section={{ label: 'Agent view', title: 'Agent view', paragraphs: ['Readable product context keeps the next action clear.'], visual: 'notes' }} accent={project.accent} />
-        </section>
+        </section>}
         <nav class="case-next" aria-label="项目导航">
           <a href={sitePath(`work/${previousProject.slug}/`)}><span>Previous project</span><strong>← {previousProject.title}</strong></a>
           <a href={sitePath(`work/${nextProject.slug}/`)}><span>Next project</span><strong>{nextProject.title} →</strong></a>

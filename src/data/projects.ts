@@ -11,6 +11,8 @@ export type Project = {
   title: string;
   eyebrow: string;
   description: string;
+  headingJoin?: string;
+  coverImage?: string;
   summary: string;
   role: string;
   year: string;
@@ -218,25 +220,25 @@ export const personalProjects = kainProjects;
 
 const pouloReference = [
   {
-    slug: 'fetaui', title: 'fetaUI', description: 'An animated design system that agents can read.', eyebrow: '#AIandAgentics #DesignSystem', summary: 'I designed, built and shipped an open source animated icon and UI library on my own: 5,987 icons in 10 styles, 347 components with motion, and an MCP server so coding agents use the real thing.', tags: ['AI and Agentics', 'Design System'], role: 'Founder, Designer and Developer', year: '2026', team: 'Open source', accent: 'blue' as const
+    slug: 'fetaui', title: 'fetaUI', description: 'An animated design system that agents can read.', eyebrow: '#AIandAgentics #DesignSystem', summary: 'I designed, built and shipped an open source animated icon and UI library on my own: 5,987 icons in 10 styles, 347 components with motion, and an MCP server so coding agents use the real thing.', tags: ['AI and Agentics', 'Design System'], role: 'Founder, Designer and Developer', year: '2026', team: 'Open source', accent: 'blue' as const, coverImage: '/poulo-assets/showcase-backdrop.jpg'
   },
   {
-    slug: 'billdr', title: 'Billdr AI', description: 'Redesigning how crews run their day on site.', eyebrow: '#AIandAgentics #MobileApp', summary: "I led the design of Billdr's first mobile app for general contractors and their crews, from field research to a cross platform design system and a validated MVP.", tags: ['AI and Agentics', 'Mobile App', 'SaaS'], role: 'Lead Product Designer', year: '2026', team: 'Billdr', accent: 'blue' as const
+    slug: 'billdr', title: 'Billdr AI', description: 'Redesigning how crews run their day on site.', eyebrow: '#AIandAgentics #MobileApp', summary: "I led the design of Billdr's first mobile app for general contractors and their crews, from field research to a cross platform design system and a validated MVP.", tags: ['AI and Agentics', 'Mobile App', 'SaaS'], role: 'Lead Product Designer', year: '2026', team: 'Billdr', accent: 'blue' as const, coverImage: '/poulo-assets/showcase-backdrop.jpg'
   },
   {
-    slug: 'chloe', title: 'Chloe', description: 'Designing an agentic AI operator that does the retention work so studio owners don’t have to.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I designed the surfaces where studio owners meet Chloe: connecting their CRM, reading the business at a glance, and talking to an AI that acts on what it sees, on web and on the floor.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Lead Product Designer', year: '2026', team: 'Chloe', accent: 'yellow' as const
+    slug: 'chloe', title: 'Designing Chloe', description: 'an agentic AI operator that does the retention work so studio owners don’t have to.', headingJoin: ', ', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I designed the surfaces where studio owners meet Chloe: connecting their CRM, reading the business at a glance, and talking to an AI that acts on what it sees, on web and on the floor.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Lead Product Designer', year: '2026', team: 'Chloe', accent: 'yellow' as const, coverImage: '/poulo-assets/chloe-backdrop.webp'
   },
   {
-    slug: 'otera', title: 'Otera AI', description: 'Designing the trust layer for enterprise AI, so people could check, correct and teach the model.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I led product design for a Series A platform that automates back office documents with in house models and LLMs. I owned the design discipline, the design system and features like HITL, AI Coworker and pre processing.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Founding Product Designer', year: '2023–25', team: 'Otera', accent: 'coral' as const
+    slug: 'otera', title: 'Designing the trust layer for enterprise AI', description: 'so people could check, correct and teach the model.', headingJoin: ', ', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I led product design for a Series A platform that automates back office documents with in house models and LLMs. I owned the design discipline, the design system and features like HITL, AI Coworker and pre processing.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Founding Product Designer', year: '2023–25', team: 'Otera', accent: 'coral' as const, coverImage: '/poulo-assets/otera-backdrop.webp'
   },
   {
-    slug: 'nexscale', title: 'NexScale website', description: 'From taste debate to triage.', eyebrow: '#Website', summary: 'I audited the live site, wrote the case for change, repositioned the product and shipped a redesigned site on Framer. I owned it end to end in one week.', tags: ['Websites'], role: 'Web Designer and Developer', year: '2026', team: 'NexScale', accent: 'yellow' as const
+    slug: 'nexscale', title: 'NexScale website', description: 'From taste debate to triage.', eyebrow: '#Website', summary: 'I audited the live site, wrote the case for change, repositioned the product and shipped a redesigned site on Framer. I owned it end to end in one week.', tags: ['Websites'], role: 'Web Designer and Developer', year: '2026', team: 'NexScale', accent: 'yellow' as const, coverImage: '/poulo-assets/nexscale-backdrop.webp'
   },
   {
-    slug: 'qpage', title: 'QPage', description: 'Making the talent pool something recruiters could actually reach.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'As cofounder and CPO, I led product and design for an AI ATS and CRM built to make tech hiring faster, fairer and data driven.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Cofounder, CPO', year: '2023–25', team: 'QPage', accent: 'blue' as const
+    slug: 'qpage', title: 'QPage', description: 'Making the talent pool something recruiters could actually reach.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'As cofounder and CPO, I led product and design for an AI ATS and CRM built to make tech hiring faster, fairer and data driven.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Cofounder, CPO', year: '2023–25', team: 'QPage', accent: 'blue' as const, coverImage: '/poulo-assets/qpage-backdrop.webp'
   },
   {
-    slug: 'weldica', title: 'Weldica', description: 'Turning compliance paperwork into a guided conversation.', eyebrow: '#AIandAgentics #SaaS #DesignSystem', summary: 'I designed a web app that automates welding procedure qualification. A conversational assistant guides supervisors from first inquiry to final approval, against CSA W47.1 and AWS D1.1.', tags: ['AI and Agentics', 'SaaS', 'Design System'], role: 'Product Designer', year: '2026', team: 'Weldica', accent: 'coral' as const
+    slug: 'weldica', title: 'Weldica', description: 'Turning compliance paperwork into a guided conversation.', eyebrow: '#AIandAgentics #DesignSystem', summary: 'I designed a web app that automates welding procedure qualification. A conversational assistant guides supervisors from first inquiry to final approval, against CSA W47.1 and AWS D1.1.', tags: ['AI and Agentics', 'Design System'], role: 'Product Designer', year: '2026', team: 'Weldica', accent: 'coral' as const, coverImage: '/poulo-assets/weldica-backdrop.webp'
   }
 ];
 
@@ -277,7 +279,10 @@ const pouloSections: Record<string, ProjectSection[]> = {
     ['Multi branch analysis', 'Branching questions preserve the evidence behind a recommendation and make the path reviewable.'],
     ['Executive Summary', 'A short summary turns the most important signals into a shareable update.'],
     ['Business Pulse', 'The pulse view keeps visits, members, and retention trends in one calm surface.'],
-    ['Community Vibe', 'Qualitative feedback sits alongside the numbers so context is not lost.']
+    ['Community Vibe', 'Qualitative feedback sits alongside the numbers so context is not lost.'],
+    ['Craft', 'The product language stayed close to the people using it, with calm states and clear next steps.'],
+    ['Words as design material', 'Short, direct language made a recommendation easier to trust and easier to act on.'],
+    ['Design system', 'A small set of shared primitives kept the operator coherent across dashboards, prompts, and mobile views.']
   ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'network' })),
   otera: [
     ['Overview', 'A generative automation platform streamlined back-office processes by integrating models with the tools and workflows teams already use.'],
@@ -293,7 +298,19 @@ const pouloSections: Record<string, ProjectSection[]> = {
     ['User journey map', 'The journey map made every handoff visible from intake to approval.'],
     ['User research synthesis', 'Themes from interviews became signals the product could explain and act on.'],
     ['Usability tests', 'Short sessions exposed where confidence and control needed to be clearer.'],
-    ['SUS', 'A lightweight usability measure gave the team a shared baseline for iteration.']
+    ['SUS', 'A lightweight usability measure gave the team a shared baseline for iteration.'],
+    ['Feature: HITL (Human-in-the-loop)', 'Human review gives teams a deliberate checkpoint before an automated document moves forward.'],
+    ['Problem', 'Back-office work was slow because model output was hard to inspect, correct, and explain.'],
+    ['Discovery process', 'Research and prototypes made the highest-risk handoffs visible before implementation.'],
+    ['What we learned', 'People trusted automation when the interface showed evidence, status, and a clear correction path.'],
+    ['Goal', 'Make review feel like a natural part of the workflow while preserving speed.'],
+    ['Designs and Prototyping', 'Prototypes tested how a person could inspect a model suggestion without losing the surrounding context.'],
+    ['Impact and Lessons', 'The system reduced uncertainty by making each automated step understandable and reversible.'],
+    ['Impact', 'Teams moved faster when the product made confidence visible at the point of decision.'],
+    ['What made the difference', 'A consistent review pattern gave every feature the same calm, accountable interaction.'],
+    ['Other Product Features', 'Supporting tools extend the same trust model across the document lifecycle.'],
+    ['AI Coworker', 'A focused assistant helps teams turn a question into a structured next step.'],
+    ['Pre-processing', 'Early checks catch missing context before a model starts its work.']
   ].map(([title, paragraph]) => ({ label: title, title, paragraphs: [paragraph], visual: 'network' }))
 };
 

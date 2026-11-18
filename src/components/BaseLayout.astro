@@ -70,7 +70,7 @@ const jsonLd = {
     <SiteFooter />
     <aside class="cookie-banner" data-cookie aria-label="Cookie preferences">
       <h2>Cookies</h2>
-      <p>我只使用必要的存储来记住主题和菜单状态。</p>
+      <p>I use Google Analytics to see which pages get visited. It sets cookies only if you accept.</p>
       <div>
         <button type="button" data-cookie-decline>Decline</button>
         <button type="button" class="dark" data-cookie-accept>Accept</button>
@@ -102,8 +102,12 @@ const jsonLd = {
       const menuButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-menu]')];
       const chatPanel = document.querySelector<HTMLElement>('[data-chat-panel]');
       const chatTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-chat]')];
-      const mobileNav = document.querySelector<HTMLDetailsElement>('[data-mobile-nav]');
-      const mobileSummary = document.querySelector<HTMLElement>('[data-mobile]');
+      const mobileHeroTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-mobile-chat]')];
+      const heroTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-hero-chat]')];
+      const heroChatPanel = document.querySelector<HTMLElement>('[data-hero-chat-panel]');
+      const mobileNav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+      const mobileSummary = document.querySelector<HTMLButtonElement>('[data-mobile]');
+      const mobileSheet = document.querySelector<HTMLElement>('[data-sheet]');
       const closePopovers = () => {
         popovers.forEach((popover) => { popover.hidden = true; });
         menuButtons.forEach((button) => button.setAttribute('aria-expanded', 'false'));
@@ -122,12 +126,24 @@ const jsonLd = {
       };
       chatTriggers.forEach((trigger) => trigger.addEventListener('click', (event) => {
         event.stopPropagation();
+        if (mobileHeroTriggers.includes(trigger) && heroChatPanel && heroTriggers.length) {
+          const heroTrigger = heroTriggers[0];
+          const shouldOpen = heroChatPanel.hidden;
+          heroTriggers.forEach((item) => item.setAttribute('aria-expanded', String(item === heroTrigger && shouldOpen)));
+          heroChatPanel.hidden = !shouldOpen;
+          heroChatPanel.textContent = shouldOpen ? heroTrigger.dataset.message || '' : '';
+          if (chatPanel) chatPanel.hidden = true;
+          syncChatState(false);
+          closePopovers();
+          setMobileNavOpen(false);
+          return;
+        }
         if (!chatPanel) return;
         const shouldOpen = chatPanel.hidden;
         chatPanel.hidden = !shouldOpen;
         syncChatState(shouldOpen);
         closePopovers();
-        if (mobileNav) mobileNav.open = false;
+        setMobileNavOpen(false);
       }));
       document.addEventListener('click', (event) => {
         const target = event.target as HTMLElement;
@@ -135,13 +151,23 @@ const jsonLd = {
           closePopovers();
           if (chatPanel) chatPanel.hidden = true;
           syncChatState(false);
+          setMobileNavOpen(false);
         }
       });
-      mobileNav?.addEventListener('toggle', () => {
-        mobileSummary?.setAttribute('aria-expanded', String(mobileNav.open));
+      const setMobileNavOpen = (open: boolean) => {
+        mobileSummary?.setAttribute('aria-expanded', String(open));
+        mobileNav?.classList.toggle('is-open', open);
+        if (mobileSheet) {
+          mobileSheet.hidden = !open;
+          mobileSheet.setAttribute('aria-hidden', String(!open));
+        }
+      };
+      mobileSummary?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setMobileNavOpen(mobileSummary.getAttribute('aria-expanded') !== 'true');
       });
       document.querySelectorAll<HTMLAnchorElement>('[data-sheet] a').forEach((link) => link.addEventListener('click', () => {
-        if (mobileNav) mobileNav.open = false;
+        setMobileNavOpen(false);
       }));
 
       const cookieBanner = document.querySelector<HTMLElement>('[data-cookie]');

@@ -8,22 +8,22 @@ export type Experiment = {
 
 export const experiments: Experiment[] = [
   {
-    title: 'Signal Notes',
-    description: '用 Markdown 驱动文章、实验和 Now 页面的个人发布结构。',
-    type: 'Publishing system',
-    status: 'In progress',
+    title: 'Interactive 3D Turntable Component',
+    description: 'Responsive product visualiser interactions.',
+    type: 'Interaction study',
+    status: 'Shipped',
     href: '/work/signal-notes/'
   },
   {
-    title: 'Context Atlas',
-    description: '探索知识节点、时间线和关系图如何共同支持一次复盘。',
-    type: 'Interaction study',
-    status: 'In progress',
+    title: 'Component Library',
+    description: 'An animated glowy prompt input.',
+    type: 'Interface study',
+    status: 'Shipped',
     href: '/work/context-atlas/'
   },
   {
-    title: 'Quiet Console',
-    description: '一个降低通知噪音、把重点留在当天工作的界面实验。',
+    title: 'Hiring Assessment',
+    description: 'A small time-based hiring exercise.',
     type: 'Interface prototype',
     status: 'Paused',
     href: '/work/studio-console/'

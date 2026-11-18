@@ -7,24 +7,21 @@ interface Props {
 }
 
 const { project, compact = false } = Astro.props;
+const previewVideos: Record<string, string> = {
+  fetaui: 'fetaui-showcase',
+  billdr: 'billdr-voice-tasks',
+  otera: 'otera-ai-coworker',
+  nexscale: 'nexscale-cinematic',
+  qpage: 'qpage-intro',
+  weldica: 'weldica-walkthrough'
+};
+const previewVideo = previewVideos[project.slug];
+const previewImage = project.slug === 'chloe' ? '/poulo-assets/chloe-preview.webp' : undefined;
 ---
-<div class:list={['project-cover', `cover-${project.accent}`, `cover-${project.slug}`, { compact }]} aria-hidden="true">
+<div class:list={['project-cover', `cover-${project.accent}`, `cover-${project.slug}`, { compact }]} style={project.coverImage ? `--cover-image: url('${project.coverImage}')` : undefined} aria-hidden="true">
   <div class="cover-topline"><span>{project.index}</span><span>{project.tags[0]}</span></div>
-  {compact && (
-    <div class="cover-window">
-      <div class="window-toolbar"><i></i><i></i><i></i><span>{project.title}</span><b>◌</b></div>
-      <div class="window-content">
-        <aside><i></i><i></i><i></i><i></i><i></i></aside>
-        <div class="window-main">
-          <div class="window-heading"><strong>{project.title}</strong><span>•••</span></div>
-          <div class="window-stats"><i></i><i></i><i></i></div>
-          <div class="window-chart"><b></b><b></b><b></b><b></b><b></b><b></b></div>
-          <div class="window-lines"><i></i><i></i><i></i></div>
-        </div>
-      </div>
-    </div>
-    <div class="cover-prompt"><span>Ask anything about this project...</span><b>↗</b></div>
-  )}
+  {(previewVideo || previewImage) && <div class="cover-video-frame"><div class="cover-video-placeholder">{previewVideo && <video aria-label={`${project.title} preview`} muted playsinline loop preload="none" src={`https://www.poulo.site/videos/${previewVideo}.mp4`} poster={`/poulo-assets/posters/${previewVideo}.jpg`}></video>}{previewImage && <img src={previewImage} alt="" />}</div></div>}
+  {compact && <div class="cover-prompt"><span>Ask anything about this project...</span><b>↗</b></div>}
   {project.accent === 'coral' && (
     <div class="cover-network">
       <span class="cover-node node-a"></span><span class="cover-node node-b"></span><span class="cover-node node-c"></span>

@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
 import ProjectCover from '../components/ProjectCover.astro';
+import Portrait from '../components/Portrait.astro';
 import { projects } from '../data/projects';
 import { experiments } from '../data/experiments';
 import { projectPath, sitePath } from '../utils/site';
 
 const workFilters = ['All', 'AI and Agentics', 'Websites', 'SaaS', 'Mobile App', 'Design System'];
-const stackItems = ['Product strategy', 'User research', 'Interaction design', 'Design systems', 'React', 'TypeScript', 'Astro', 'Prototyping', 'AI workflows', 'Front-end engineering'];
+const stackItems = [
+  ['Figma', 'figma'], ['Sketch', 'sketch'], ['Adobe', 'adobe'], ['Notion', 'notion'], ['ClickUp', 'clickup'], ['Slack', 'slack'],
+  ['Miro', 'miro'], ['Claude', 'claude'], ['OpenAI', 'openai'], ['Maze', 'maze'], ['Google Antigravity', 'antigravity'], ['Cursor', 'cursor'],
+  ['GitHub', 'github'], ['GitLab', 'gitlab'], ['Storybook', 'storybook'], ['Vercel', 'vercel'], ['Framer', 'framer'], ['Webflow', 'webflow'],
+  ['Shopify', 'shopify'], ['Supabase', 'supabase'], ['Cloudflare', 'cloudflare'], ['Mixpanel', 'mixpanel'], ['Google Analytics', 'google-analytics'], ['Power BI', 'power-bi'],
+  ['Tableau', 'tableau'], ['Zapier', 'zapier'], ['Google Tag Manager', 'google-tag-manager'], ['Mailchimp', 'mailchimp'], ['Intercom', 'intercom'], ['Stripe', 'stripe']
+] as const;
+const pouloVideoBase = 'https://www.poulo.site/videos/';
+const experimentVideos = ['turntable-ad', 'ai-components-package', 'mock-hiring-assessment-teaser'] as const;
 ---
 
 <BaseLayout title="Kain Yin — Product designer and builder">
@@ -14,54 +23,45 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
     <div class="container home-hero-inner">
       <div class="home-hero-copy">
         <p class="eyebrow">Technical product designer</p>
-        <h1 id="hero-title"><span class="hero-title-desktop">Seasoned UX Designer</span><span class="hero-title-tablet">Experienced Product<br />Manager</span><span class="hero-title-mobile">AI Product<br />Builder</span></h1>
+        <h1 id="hero-title"><span class="sr-only">Technical Product Designer, Seasoned UX Designer, Experienced Product Manager, AI Product Builder</span><span aria-hidden="true" class="hero-title-desktop"><span>Seasoned UX</span><span>Designer</span></span><span aria-hidden="true" class="hero-title-tablet">Experienced Product<br />Manager</span><span aria-hidden="true" class="hero-title-mobile">AI Product<br />Builder</span></h1>
         <p class="home-hero-description">从用户问题、产品结构到可用界面和真实代码，把复杂想法变成可以被理解、使用和继续成长的产品。</p>
         <div class="hero-actions">
           <a class="button secondary" href="#about">About me <span aria-hidden="true">↓</span></a>
           <a class="button primary" href="#work">See my work <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <div class="hero-avatar" aria-label="Abstract illustrated portrait of Kain">
-        <div class="hero-avatar-orbit orbit-one"></div>
-        <div class="hero-avatar-orbit orbit-two"></div>
-        <div class="avatar-hair"></div>
-        <div class="avatar-ear avatar-ear-left"></div>
-        <div class="avatar-ear avatar-ear-right"></div>
-        <div class="avatar-face"><i class="avatar-eye avatar-eye-left"></i><i class="avatar-eye avatar-eye-right"></i><b class="avatar-nose"></b><b class="avatar-mouth"></b></div>
-        <div class="avatar-neck"></div>
-        <div class="avatar-body"><span>K / 26</span></div>
-        <div class="avatar-spark spark-one"></div><div class="avatar-spark spark-two"></div>
+      <div class="hero-avatar" aria-label="Portrait illustration that looks toward your cursor">
+        <Portrait />
       </div>
       <div class="hero-note">
-        <p class="eyebrow">Hi, I’m Pouya</p>
+        <button class="hero-trigger hero-about-trigger" type="button" data-hero-chat data-message="Technical PM by trade, User interface and experience Designer by necessity | Shipping user-centric products from problem/concept to code" aria-expanded="false">Hi, I’m Pouya</button>
+        <div class="hero-chat" data-hero-chat-panel hidden role="status" aria-live="polite"></div>
         <button class="hero-trigger" type="button" data-hero-chat data-message="我会把研究、结构、交互和代码放在同一个工作流里。" aria-expanded="false">I design and build interfaces</button>
         <p>Craft AI and SaaS products (Mobile, Desktop, and Web) from the pulse of user needs to the forefront of technology.</p>
         <button class="hero-trigger" type="button" data-hero-chat data-message="产品设计和前端工程一起工作，能让决策更快被验证。" aria-expanded="false">Product design and front-end engineering</button>
-        <div class="hero-chat" data-hero-chat-panel hidden role="status" aria-live="polite"></div>
       </div>
     </div>
   </section>
 
   <section class="logo-strip" aria-label="Areas of practice">
     <div class="container logo-strip-inner">
-      <span>Led impactful initiatives at</span>
+      <h2>Led impactful initiatives at</h2>
       <div class="logo-strip-items" aria-hidden="true">
-        <b>ROCKET</b><b>LG</b><b>▶</b><b> B</b><b>✣</b><b>↟</b>
+        <img src={sitePath('poulo-assets/logo-07.png')} alt="" /><img src={sitePath('poulo-assets/logo-04.png')} alt="" /><img src={sitePath('poulo-assets/logo-06.png')} alt="" /><img src={sitePath('poulo-assets/logo-08.png')} alt="" /><img src={sitePath('poulo-assets/logo-05.png')} alt="" /><img src={sitePath('poulo-assets/logo-03.png')} alt="" /><img src={sitePath('poulo-assets/logo-02.png')} alt="" /><img src={sitePath('poulo-assets/logo-01.png')} alt="" />
       </div>
     </div>
   </section>
 
   <section class="home-section interface-section" aria-labelledby="interface-title">
     <div class="container">
-      <p class="eyebrow">Interface studies</p>
       <h2 id="interface-title">Designed components and products directly rooted in user discovery, bridging raw customer insights with intuitive UI/UX and core functional requirements.</h2>
-      <div class="interface-gallery" aria-label="Interface study previews">
+      <section class="interface-gallery" aria-label="Selected work">
         <article class="interface-card interface-receipt"><span>01 / Receipt printer</span><h3>Feta Coffee</h3><div class="receipt-lines"></div><strong>$18.58</strong></article>
         <article class="interface-card interface-gauge"><span>02 / Liquid gauge</span><h3>Storage</h3><div class="gauge-ring">72%</div><small>35.8 GB free</small></article>
         <article class="interface-card interface-code"><span>03 / OTP vault</span><h3>Enter the code</h3><strong>••••••••</strong><small>Paste your code to continue</small></article>
         <article class="interface-card interface-chart"><span>04 / Line forecast</span><h3>At this pace you reach the budget on Sep 26</h3><div class="forecast-line"></div></article>
-        <article class="interface-card interface-bars"><span>05 / Daily activity</span><h3>ACME · Daily</h3><div class="activity-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
-      </div>
+        <article class="interface-card interface-bars"><span>05 / Daily activity</span><h3>ACME · Daily</h3><div class="activity-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small>Agent view</small></article>
+      </section>
     </div>
   </section>
 
@@ -85,7 +85,7 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
         {projects.map((project) => (
           <article class="case-card" data-case-card data-tags={project.tags.join('|')}>
             <header class="case-card-header">
-              <div><p class="eyebrow">{project.eyebrow}</p><h3>{project.title}. {project.description}</h3></div>
+              <div><p class="eyebrow">{project.eyebrow}</p><h3>{project.slug === 'fetaui' ? <>fetaUI. An animated design system<br />that agents can read.</> : <>{project.title}{project.headingJoin ?? '. '}{project.description}</>}</h3><ul class="case-tags">{project.tags.map((tag) => <li>{tag}</li>)}</ul></div>
               <span class="case-year">{project.year}</span>
             </header>
             <div class="case-card-main">
@@ -96,9 +96,9 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
                 <a class="learn-link" href={projectPath(project.slug)}>Learn more <span aria-hidden="true">↗</span></a>
               </div>
             </div>
-            <div class="case-insights">
-              {project.sections.slice(0, 4).map((section, index) => <div class="insight-card"><span>{String(index + 1).padStart(2, '0')}</span><strong>{section.title}</strong><p>{section.paragraphs[0]}</p></div>)}
-            </div>
+            <ul class="case-insights">
+              {project.sections.slice(0, 4).map((section, index) => <li class="insight-card"><span>{String(index + 1).padStart(2, '0')}</span><h4>{section.title}</h4><p>{section.paragraphs[0]}</p></li>)}
+            </ul>
           </article>
         ))}
       </div>
@@ -107,23 +107,21 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
 
   <section class="home-section experiments-section" id="experiments" aria-labelledby="experiments-title">
     <div class="container">
-      <div class="section-heading"><div><p class="eyebrow">Small things, shipped often</p><h2 id="experiments-title">AI experiments.</h2></div><a href={sitePath('experiments/')}>View all ↗</a></div>
+      <div class="section-heading"><div><p class="eyebrow">Small things, shipped often</p><h2 id="experiments-title">AI Experiments</h2></div><a href={sitePath('experiments/')}>View all ↗</a></div>
       <div class="experiments-grid">
-        {experiments.map((experiment, index) => <article class="experiment-card"><div class="experiment-preview"><span>{String(index + 1).padStart(2, '0')}</span><i></i><i></i></div><p class="eyebrow">{experiment.type} · {experiment.status}</p><h3>{experiment.title}</h3><p>{experiment.description}</p><a class="learn-link" href={experiment.href}>Give it a try <span aria-hidden="true">↗</span></a></article>)}
+        {experiments.map((experiment, index) => <article class="experiment-card"><div class="experiment-preview"><video aria-label={experiment.title} muted playsinline loop preload="none" src={`${pouloVideoBase}${experimentVideos[index]}.mp4`} poster={sitePath(`poulo-assets/posters/${experimentVideos[index]}.jpg`)}></video><span>{String(index + 1).padStart(2, '0')}</span><i></i><i></i></div><p class="eyebrow">{experiment.type} · {experiment.status}</p><h3>{experiment.title}</h3><p>{experiment.description}</p><a class="learn-link" href={experiment.href}>Give it a try <span aria-hidden="true">↗</span></a></article>)}
       </div>
     </div>
   </section>
 
   <section class="home-section about-section" id="about" aria-labelledby="about-title">
     <div class="container">
-      <p class="eyebrow">Ask me anything...</p>
+      <h2 class="about-kicker">Ask me anything...</h2>
       <div class="about-grid">
-        <div><p class="eyebrow">About me</p><h2 id="about-title">I also code, speak in English and Chinese, and keep making things.</h2></div>
+        <div><p class="eyebrow">About me</p><h3 id="about-title">I also code, speak in English and French, play soccer and volleyball.</h3></div>
         <div class="about-copy">
-          <p>我是 Kain，一名关注产品策略、交互设计和前端实现的产品设计师。我喜欢从模糊的问题开始，做出足够清晰的结构，再把它交付到真实的使用场景。</p>
-          <details open><summary>Hi, I’m Kain</summary><p>我在产品、设计系统和 AI 工具之间工作，也维护一个记录判断、实验和当前状态的个人网站。</p></details>
-          <details><summary>I design and build interfaces</summary><p>从研究和信息架构，到组件、内容和前端，我会把整条体验链路放在一起考虑。</p></details>
-          <details><summary>Product design and front-end engineering</summary><p>我用可维护的内容模型、设计令牌和原生交互把设计变成可以继续迭代的产品。</p></details>
+          <p>I’m Pouya aka poulo (pronounced p-ou-l-o), a product manager with background in business and software engineering who fell in love with design. I’ve learned to design, build and test ideas quickly.</p>
+          <p>Outside of work, I tinker with AI tools like Claude mostly with Antigravity/Cursor to create small productivity experiments. Away from the screen, you’ll find me cooking, playing football, or watching a game.</p>
         </div>
       </div>
     </div>
@@ -131,18 +129,25 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
 
   <section class="home-section journey-section" aria-labelledby="journey-title">
     <div class="container">
-      <div class="section-heading"><div><p class="eyebrow">Journey</p><h2 id="journey-title">A few useful chapters.</h2></div></div>
-      <div class="journey-table"><div><strong>Product designer and builder</strong><span>Independent</span><span>Asia</span><span>2024 — now</span></div><div><strong>Design systems and AI workflows</strong><span>Selected projects</span><span>Remote</span><span>2022 — 24</span></div><div><strong>Product strategy and interaction</strong><span>Digital products</span><span>China</span><span>2019 — 22</span></div></div>
+      <div class="section-heading"><div><p class="eyebrow">Journey</p><h3 id="journey-title">Journey</h3></div></div>
+      <ul class="journey-table">
+        <li><strong>Lead Product Designer and Product Strategist</strong><span>Freelancer</span><span>Vancouver - Montreal</span><span>2025-Now</span></li>
+        <li><strong>Founding Product Designer</strong><span>Deepopinion</span><span>Innsbruck, Austria</span><span>2023-25</span></li>
+        <li><strong>Cofounder, CPO</strong><span>QPage</span><span>London, UK</span><span>2021-23</span></li>
+        <li><strong>UX Product Manager</strong><span>Zalando</span><span>Berlin, Germany</span><span>2019-21</span></li>
+        <li><strong>Masters in Marketing</strong><span>Aalto school of business</span><span>Helsinki, Finland</span><span>2015-17</span></li>
+        <li><strong>Managing Director</strong><span>Rocket Internet</span><span>Dubai, UAE</span><span>2017-19</span></li>
+        <li><strong>Cofounder, Product</strong><span>Reyhoon</span><span>Tehran, Iran</span><span>2016-17</span></li>
+        <li><strong>Senior Product Manager</strong><span>LG Electronics</span><span>Dubai, UAE</span><span>2009-2016</span></li>
+      </ul>
     </div>
   </section>
 
   <section class="home-section stack-section" id="stack" aria-labelledby="stack-title">
-    <div class="container stack-grid"><div><p class="eyebrow">My stack</p><h2 id="stack-title">Tools are useful when they make the next decision clearer.</h2></div><div class="stack-items">{stackItems.map((item) => <span>{item}</span>)}</div></div>
+    <div class="container stack-grid"><div><p class="eyebrow">My Stack</p><h3 id="stack-title">My Stack</h3></div><div class="stack-items">{stackItems.map(([name, file]) => <span><img src={sitePath(`poulo-assets/stack/${file}.svg`)} alt={name} loading="lazy" /></span>)}</div></div>
   </section>
 
-  <section class="home-section contact-section" id="contact" aria-labelledby="contact-title">
-    <div class="container contact-inner"><div><p class="eyebrow">Have a question?</p><h2 id="contact-title">Let’s make something <span>clearer.</span></h2></div><a class="button primary" href="mailto:hello@example.com">hello@example.com <span aria-hidden="true">↗</span></a></div>
-  </section>
+  <section class="home-section contact-section" id="contact" aria-label="Contact"></section>
 </BaseLayout>
 
 <script>
@@ -162,15 +167,15 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
   const chatTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-hero-chat]')];
   const chatPanel = document.querySelector<HTMLElement>('[data-hero-chat-panel]');
   const syncHeroStates = () => {
-    const mobile = window.matchMedia('(max-width: 800px)').matches;
-    const [designTrigger, engineeringTrigger] = chatTriggers;
+    const [aboutTrigger, designTrigger, engineeringTrigger] = chatTriggers;
+    if (aboutTrigger) {
+      aboutTrigger.setAttribute('aria-expanded', 'false');
+    }
     if (designTrigger) {
-      if (mobile) designTrigger.setAttribute('aria-expanded', 'false');
-      else designTrigger.removeAttribute('aria-expanded');
+      designTrigger.setAttribute('aria-expanded', 'false');
     }
     if (engineeringTrigger) {
-      if (mobile) engineeringTrigger.removeAttribute('aria-expanded');
-      else engineeringTrigger.setAttribute('aria-expanded', 'false');
+      engineeringTrigger.setAttribute('aria-expanded', 'false');
     }
   };
   syncHeroStates();
@@ -183,4 +188,19 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
       chatPanel.textContent = isOpen ? '' : trigger.dataset.message || '';
     }
   }));
+  const portrait = document.querySelector<SVGElement>('.hero-portrait svg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (portrait && !reduceMotion) {
+    const heroAvatar = document.querySelector<HTMLElement>('.hero-avatar');
+    heroAvatar?.addEventListener('pointermove', (event) => {
+      const bounds = heroAvatar.getBoundingClientRect();
+      const look = Math.max(-1, Math.min(1, (event.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2)));
+      portrait.style.setProperty('--look', look.toFixed(4));
+    });
+    heroAvatar?.addEventListener('pointerleave', () => portrait.style.setProperty('--look', '0'));
+    window.setInterval(() => {
+      portrait.style.setProperty('--blink', '0');
+      window.setTimeout(() => portrait.style.setProperty('--blink', '1'), 120);
+    }, 4200);
+  }
 </script>

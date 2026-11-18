@@ -7,6 +7,19 @@ import { projectPath, sitePath } from '../utils/site';
 import { projects } from '../data/projects';
 
 const { eyebrow = 'KAIN / PERSONAL' } = Astro.props;
+const featuredProjectLabels = [
+  ['fetaui', 'fetaUI', 'Animated design system for agents · 2026'],
+  ['billdr', 'Billdr AI', 'Construction management · 2026'],
+  ['chloe', 'NexScale Chloe', 'Agentic retention platform · 2026'],
+  ['otera', 'Otera AI', 'AI document automation · 2023–25'],
+  ['qpage', 'QPage', 'AI ATS and CRM · 2021–23'],
+  ['weldica', 'Weldica', 'Welding compliance AI · 2025'],
+  ['nexscale', 'NexScale website', 'Website rebuild · 2026']
+] as const;
+const featuredProjects = featuredProjectLabels.flatMap(([slug, title, subtitle]) => {
+  const project = projects.find((item) => item.slug === slug);
+  return project ? [{ project, title, subtitle }] : [];
+});
 ---
 <header class="site-header" role="banner">
   <div class="container header-inner">
@@ -17,52 +30,54 @@ const { eyebrow = 'KAIN / PERSONAL' } = Astro.props;
       <button class="nav-item nav-menu-trigger" type="button" data-menu="experiments" aria-expanded="false" aria-controls="experiments-popover">Experiments</button>
       <button class="nav-item nav-about" type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel"></button>
       <a href={sitePath('#stack')}>Stack</a>
-      <a class="header-cta" href="mailto:hello@example.com">Book a call ↗</a>
+      <a class="header-cta" href="mailto:hello@example.com">Book a Call ↗</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
     </nav>
-    <details class="mobile-nav" data-mobile-nav>
-      <summary data-mobile role="button" aria-label="Open menu" aria-controls="mobile-sheet" aria-expanded="false">Open menu</summary>
-      <nav id="mobile-sheet" data-sheet aria-label="移动端导航">
+    <div class="mobile-nav" data-mobile-nav>
+      <button class="mobile-nav-trigger" type="button" data-mobile role="button" aria-haspopup="menu" aria-label="Open menu" aria-controls="mobile-sheet" aria-expanded="false">Open menu</button>
+      <nav id="mobile-sheet" data-sheet aria-label="移动端导航" aria-hidden="true" hidden>
         <a href={sitePath()}>Home</a>
         <a href={sitePath('#work')}>Work</a>
         <a href={sitePath('#experiments')}>Experiments</a>
-        <button type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel">Hi, I’m Pouya</button>
+        <button type="button" data-chat data-mobile-chat aria-label="About" aria-expanded="false" aria-controls="hero-chat-panel">About</button>
         <a href={sitePath('#stack')}>Stack</a>
-        <a href="mailto:hello@example.com">Book a call ↗</a>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
       </nav>
-    </details>
-    <button class="mobile-about" type="button" data-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="chat-panel"></button>
+    </div>
+    <a class="mobile-book" href="mailto:hello@example.com" aria-label="Book a Call">Book a Call</a>
+    <button class="mobile-theme" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
+    <button class="mobile-about" type="button" data-chat data-mobile-chat aria-label="Hi, I’m Pouya" aria-expanded="false" aria-controls="hero-chat-panel"></button>
   </div>
   <div class="desktop-popover" id="work-popover" data-popover="work" hidden>
     <div class="popover-main">
       <p class="eyebrow">CASE STUDIES</p>
       <div class="work-list">
-        {projects.map((project) => <a href={projectPath(project.slug)}><strong>{project.title}</strong><span>{project.eyebrow}</span></a>)}
+        {featuredProjects.map(({ project, title, subtitle }) => <a href={projectPath(project.slug)}><strong>{title}</strong><span>{subtitle}</span></a>)}
       </div>
     </div>
-    <footer><span>{projects.length} case studies</span><a href={sitePath('#work')}>Browse all work ↗</a></footer>
+    <footer><span>{featuredProjects.length} case studies</span><a href={sitePath('#work')}>Browse all works →</a></footer>
   </div>
   <div class="desktop-popover experiments" id="experiments-popover" data-popover="experiments" hidden>
     <div class="popover-main">
       <p class="eyebrow">AI EXPERIMENTS</p>
       <div class="work-list">
-        <a href={sitePath('#experiments')}><strong>Signal Notes</strong><span>Publishing system</span></a>
-        <a href={sitePath('#experiments')}><strong>Context Atlas</strong><span>Research mapping</span></a>
-        <a href={sitePath('#experiments')}><strong>Quiet Console</strong><span>Interface prototype</span></a>
+        <a href={sitePath('#experiments')}><strong>3D Turntable Component</strong><span>turntable.poulo.site</span></a>
+        <a href={sitePath('#experiments')}><strong>Component Library</strong><span>components.poulo.site</span></a>
+        <a href={sitePath('#experiments')}><strong>Assessment</strong><span>assessment.poulo.site</span></a>
       </div>
     </div>
-    <footer><span>Small things, shipped often</span><a href={sitePath('#experiments')}>See experiments ↗</a></footer>
+    <footer><span>Live demos, each in a new tab</span><a href={sitePath('#experiments')}>See them here →</a></footer>
   </div>
   <section class="chat-panel" id="chat-panel" data-chat-panel role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden>
     <button class="chat-close" type="button" data-chat aria-label="关闭关于面板">×</button>
-    <strong id="chat-title">Ask about Kain</strong>
-    <small>回答来自个人作品和工作方式的摘要。</small>
-    <p>你好。我关注产品策略、交互设计、设计系统和真实代码。</p>
+    <h2 class="sr-only">Agent view</h2>
+    <strong id="chat-title">Ask about Pouya</strong>
+    <small>Answers come straight from my own notes.</small>
+    <p>Hi. This chat answers from Pouya’s own notes. Ask about my work, experience, skills or how I approach design.</p>
     <div class="chat-chips">
-      <a href={sitePath('#about')}>我做什么？</a>
-      <a href={sitePath('#work')}>看看作品</a>
-      <a href={sitePath('#stack')}>使用哪些工具？</a>
+      <a href={sitePath('#about')}>What do you do?</a>
+      <a href={sitePath('#work')}>Tell me about your work at Otera</a>
+      <a href={sitePath('#about')}>How do you approach design?</a>
+      <a href="mailto:hello@example.com">Are you open to new roles?</a>
     </div>
   </section>
 </header>
