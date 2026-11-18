@@ -21,7 +21,10 @@
 - `src/styles/`：全局样式与构建时使用的令牌。
 - `src/pages/rss.xml.ts`、`src/pages/sitemap.xml.ts`、`src/pages/robots.txt.ts`：SEO、RSS 和爬虫入口。
 - `scripts/acceptance.mjs`：基于 Playwright 的生产预览验收脚本。
+- `poulo-analysis.md`：目标站点的 clean-room 分析、交互状态流和实现映射。
 - `dist/`：Astro 静态构建输出。
+
+目标站点分析参考项目已克隆到 `D:\work\craft-anything`。仓库来源是 `storytold/craft-anything`，其 Study → Build → Check → Ready 流程用于组织本次分析和多宽度验收。
 
 ## 本地开发
 

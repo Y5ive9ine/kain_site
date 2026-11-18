@@ -1,7 +1,17 @@
+---
+import { sitePath } from '../utils/site';
+---
 <footer class="site-footer">
   <div class="container footer-inner">
-    <span>© 2026 Kain Yin</span>
-    <span>Designed and built with Astro</span>
-    <a href="mailto:hello@example.com">hello@example.com ↗</a>
+    <div>
+      <span>© 2026 Kain Yin</span>
+      <span>Designed and built with Astro</span>
+    </div>
+    <nav aria-label="Footer links">
+      <a href={sitePath('notes/')}>Notes</a>
+      <a href={sitePath('now/')}>Now</a>
+      <a href={sitePath('work/')}>All work</a>
+      <a href="mailto:hello@example.com">hello@example.com ↗</a>
+    </nav>
   </div>
 </footer>

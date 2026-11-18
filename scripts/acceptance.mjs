@@ -17,8 +17,6 @@ const context = await browser.newContext({
   locale: 'zh-CN',
   colorScheme: 'light'
 });
-const desktop = await context.newPage();
-await desktop.setViewportSize({ width: 1440, height: 1000 });
 const routes = [
   '/',
   '/work/',
@@ -29,6 +27,8 @@ const routes = [
   '/notes/portfolio-as-a-set-of-judgements/'
 ];
 
+const desktop = await context.newPage();
+await desktop.setViewportSize({ width: 1440, height: 1000 });
 for (const route of routes) {
   const response = await desktop.goto(`${origin}${route}`, { waitUntil: 'networkidle' });
   assert(response?.ok(), `${route} returned ${response?.status()}`);
@@ -41,6 +41,17 @@ for (const route of routes) {
 }
 
 await desktop.goto(`${origin}/`, { waitUntil: 'networkidle' });
+const initialVisibleCards = await desktop.locator('[data-case-card]:not([hidden])').count();
+await desktop.locator('[data-filter="SaaS"]').click();
+const filteredCards = await desktop.locator('[data-case-card]:not([hidden])').count();
+assert(filteredCards > 0 && filteredCards < initialVisibleCards, 'work filter did not reduce the showcase');
+await desktop.locator('[data-view="grid"]').click();
+assert(await desktop.locator('[data-case-list]').getAttribute('data-view') === 'grid', 'grid view did not activate');
+await desktop.locator('[data-view="deck"]').click();
+assert(await desktop.locator('[data-case-list]').getAttribute('data-view') === 'deck', 'deck view did not activate');
+await desktop.locator('[data-filter="All"]').click();
+  await desktop.locator('[data-view="showcase"]').click();
+  await desktop.evaluate(() => document.activeElement?.blur());
 await desktop.screenshot({ path: path.join(qaDir, 'home-desktop.png'), fullPage: true });
 
 const mobile = await context.newPage();
@@ -61,6 +72,16 @@ assert(await mobile.locator('.case-index').isVisible(), 'case study index should
 const caseOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
 assert(!caseOverflow, 'case study has horizontal overflow at mobile width');
 await mobile.screenshot({ path: path.join(qaDir, 'case-mobile.png'), fullPage: true });
+
+for (const width of [375, 768, 1024, 1920]) {
+  const page = await context.newPage();
+  await page.setViewportSize({ width, height: 900 });
+  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
+  assert((await page.locator('h1').count()) === 1, `homepage should have one h1 at ${width}px`);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  assert(!overflow, `homepage has horizontal overflow at ${width}px`);
+  await page.close();
+}
 
 const rss = await context.request.get(`${origin}/rss.xml`);
 assert(rss.ok(), 'RSS endpoint failed');

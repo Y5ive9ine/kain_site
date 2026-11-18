@@ -1,25 +1,25 @@
 :root {
   color-scheme: light;
 
-  --color-bg: #f4f1ea;
-  --color-surface: #fffdf8;
-  --color-surface-muted: #ebe7df;
-  --color-surface-inverse: #151412;
-  --color-text: #151412;
-  --color-text-muted: #6f6a60;
-  --color-text-inverse: #f8f5ee;
-  --color-border: #d5cfc4;
-  --color-border-strong: #a9a195;
-  --color-accent: #ef633d;
-  --color-accent-hover: #d95230;
-  --color-accent-soft: #f8d7cc;
-  --color-highlight: #f2c84b;
-  --color-success: #2d8b64;
+  --color-bg: #ffffff;
+  --color-surface: #f6f6f6;
+  --color-surface-muted: #eeeeee;
+  --color-surface-inverse: #111111;
+  --color-text: #161616;
+  --color-text-muted: #7b7b7b;
+  --color-text-inverse: #ffffff;
+  --color-border: #e4e4e4;
+  --color-border-strong: #c7c7c7;
+  --color-accent: #5968d8;
+  --color-accent-hover: #4654be;
+  --color-accent-soft: #e8eaff;
+  --color-highlight: #d9dcff;
+  --color-success: #278b66;
   --color-danger: #c94d48;
-  --color-info: #2f6bb2;
+  --color-info: #4c62c6;
 
-  --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-display: "Instrument Serif", "Noto Serif SC", Georgia, serif;
+  --font-sans: "Inter", "TikTok Sans", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-display: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
   --text-xs: clamp(.72rem, .68rem + .12vw, .78rem);
@@ -27,7 +27,7 @@
   --text-md: clamp(.98rem, .92rem + .2vw, 1.08rem);
   --text-lg: clamp(1.25rem, 1.12rem + .5vw, 1.65rem);
   --text-xl: clamp(1.8rem, 1.45rem + 1.2vw, 2.8rem);
-  --text-hero: clamp(3rem, 6vw, 7rem);
+  --text-hero: clamp(3.4rem, 7vw, 8rem);
 
   --leading-tight: 1.05;
   --leading-snug: 1.2;
@@ -44,17 +44,17 @@
   --space-9: 6rem;
   --space-10: 8rem;
 
-  --radius-sm: .375rem;
+  --radius-sm: .5rem;
   --radius-md: .75rem;
-  --radius-lg: 1.25rem;
+  --radius-lg: 1rem;
   --radius-pill: 999px;
 
   --shadow-sm: 0 1px 2px rgb(21 20 18 / 6%);
   --shadow-md: 0 14px 40px rgb(21 20 18 / 10%);
 
   --container-max: 80rem;
-  --gutter: clamp(1rem, 3vw, 3rem);
-  --header-height: 4.5rem;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --header-height: 4.25rem;
 
   --motion-fast: 140ms;
   --motion-base: 240ms;
@@ -64,19 +64,19 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #11100f;
-  --color-surface: #191715;
-  --color-surface-muted: #26221f;
-  --color-surface-inverse: #f4f1ea;
-  --color-text: #f5f1e9;
-  --color-text-muted: #aaa397;
-  --color-text-inverse: #151412;
-  --color-border: #3b352f;
-  --color-border-strong: #6d645a;
-  --color-accent: #ff744d;
-  --color-accent-hover: #ff8c6a;
-  --color-accent-soft: #5a2d24;
-  --color-highlight: #f5d36e;
+  --color-bg: #111111;
+  --color-surface: #1b1b1b;
+  --color-surface-muted: #262626;
+  --color-surface-inverse: #ffffff;
+  --color-text: #f7f7f7;
+  --color-text-muted: #a3a3a3;
+  --color-text-inverse: #161616;
+  --color-border: #373737;
+  --color-border-strong: #5b5b5b;
+  --color-accent: #aeb8ff;
+  --color-accent-hover: #c5ccff;
+  --color-accent-soft: #31345e;
+  --color-highlight: #727bc9;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 20%);
   --shadow-md: 0 18px 48px rgb(0 0 0 / 35%);
 }
