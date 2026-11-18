@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/projects';
+import { sitePath } from '../utils/site';
 
 interface Props {
   project: Project;
@@ -16,11 +17,12 @@ const previewVideos: Record<string, string> = {
   weldica: 'weldica-walkthrough'
 };
 const previewVideo = previewVideos[project.slug];
-const previewImage = project.slug === 'chloe' ? '/poulo-assets/chloe-preview.webp' : undefined;
+const previewImage = project.slug === 'chloe' ? sitePath('poulo-assets/chloe-preview.webp') : undefined;
+const coverImage = project.coverImage ? sitePath(project.coverImage) : undefined;
 ---
-<div class:list={['project-cover', `cover-${project.accent}`, `cover-${project.slug}`, { compact }]} style={project.coverImage ? `--cover-image: url('${project.coverImage}')` : undefined} aria-hidden="true">
+<div class:list={['project-cover', `cover-${project.accent}`, `cover-${project.slug}`, { compact }]} style={coverImage ? `--cover-image: url('${coverImage}')` : undefined} aria-hidden="true">
   <div class="cover-topline"><span>{project.index}</span><span>{project.tags[0]}</span></div>
-  {(previewVideo || previewImage) && <div class="cover-video-frame"><div class="cover-video-placeholder">{previewVideo && <video aria-label={`${project.title} preview`} muted playsinline loop preload="none" src={`https://www.poulo.site/videos/${previewVideo}.mp4`} poster={`/poulo-assets/posters/${previewVideo}.jpg`}></video>}{previewImage && <img src={previewImage} alt="" />}</div></div>}
+  {(previewVideo || previewImage) && <div class="cover-video-frame"><div class="cover-video-placeholder">{previewVideo && <video aria-label={`${project.title} preview`} muted playsinline loop preload="none" src={`https://www.poulo.site/videos/${previewVideo}.mp4`} poster={sitePath(`poulo-assets/posters/${previewVideo}.jpg`)}></video>}{previewImage && <img src={previewImage} alt="" />}</div></div>}
   {compact && <div class="cover-prompt"><span>Ask anything about this project...</span><b>↗</b></div>}
   {project.accent === 'coral' && (
     <div class="cover-network">

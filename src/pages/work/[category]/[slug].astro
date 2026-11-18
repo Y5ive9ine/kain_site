@@ -26,6 +26,54 @@ const projectIndex = projects.findIndex((item) => item.slug === project.slug);
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
 const hasAgentView = project.sections.some((section) => section.label.toLowerCase() === 'agent view');
+
+type DetailCard = { title: string; body: string; image?: string };
+const detailCards: Record<string, Record<string, DetailCard[]>> = {
+  fetaui: {
+    Problem: [
+      { title: 'Static sets are big but lifeless', body: 'Thousands of icons, none of them moving, so every team hand animates the same bell and the same check.' },
+      { title: 'Animated sets are tiny', body: 'Animated packs ship 100 to 300 icons, so teams mix sets and lose a single visual language.' },
+      { title: 'Motion is locked in players', body: 'Lottie and JSON players are heavy, hard to recolor and hard to theme, and an agent cannot edit them.' },
+      { title: 'Agents read screenshots', body: 'Docs are built for eyes. An agent gets no source, no props table and no tier, so it guesses.' }
+    ],
+    Approach: [
+      { title: '5,987', body: 'Icons, each in all 10 styles' },
+      { title: '59,870', body: 'Generated SVGs, from one source per icon' },
+      { title: '347', body: 'UI components with motion, 194 Free and 153 Pro' }
+    ],
+    Procedure: [
+      { title: '1. Specify', body: 'I wrote the brief, the design spec and the motion spec first: the 24 px grid, naming, the 10 style constructions, tokens and the motion presets.' },
+      { title: '2. Design in Figma', body: 'The icon file holds every style as components with color modes. The UI file has a Handoff and a Motion frame per component.' },
+      { title: '3. Generate', body: 'Deterministic pipelines emit SVGs, React components, the registry and the tokens. Generated code is never edited by hand.' },
+      { title: '4. Build with agents', body: 'Seven Claude Code agents work with narrow jobs: component builder, reviewer, UX copywriter, React Native writer, legal writer, security scan and performance review.' },
+      { title: '5. Review every commit', body: 'Before each commit the security and performance agents report on the change. Approved findings go back to the same agent to apply.' },
+      { title: '6. Ship', body: 'Pull requests go into staging, a Vercel preview runs per branch, then a release goes to main.' }
+    ],
+    'Native to agents': [
+      { title: 'search', body: 'Find components and icons by name or purpose, with tier and docs link.' },
+      { title: 'get_component', body: 'Docs plus source, with the files it imports inline when asked.' },
+      { title: 'get_icon', body: 'The SVG of an icon in any of the 10 styles, or its import.' },
+      { title: 'get_started', body: 'Install, tokens and dark mode, set up in the agent’s own project.' }
+    ],
+    Motion: [
+      { title: 'Pull Chain Light', body: 'Drag the cord down past the catch and let go, or press Space. The cord springs back, and the glow and drifting dust only run while the lamp is on.', image: 'accordion.jpg' },
+      { title: 'OTP Lock · Pro', body: 'A padlock over a code grid. The shackle lifts while the code is checked, the lock shakes and turns red on a wrong code, and it opens green on the right one.', image: 'liquid-toggle.jpg' },
+      { title: 'Activity Rings', body: 'Rings sweep in over 800 ms with an 80 ms stagger and lap past 100% when a goal is beaten.', image: 'notification-stack.jpg' },
+      { title: 'Call Summary · Pro', body: 'A recorded call, after the meeting: talk time, key moments with a playable clip, the summary and next steps.', image: 'voice-coworker.jpg' },
+      { title: 'Boarding Pass', body: 'A status change stamps a new Badge, and the field that changed moves into a chip while the old value crossfades out.', image: 'ai-components-package.jpg' },
+      { title: 'Avatar Upload', body: 'Drop a photo or pick a sample face. Progress, replace and a size error animate in place.', image: 'search-combobox.jpg' },
+      { title: 'Rich Text Editor', body: 'Select text to format it, or type / on an empty line for blocks. It exports clean Markdown and HTML.', image: 'fetaui-showcase.jpg' }
+    ],
+    'Under the hood': [
+      { title: 'Ten styles from one drawing', body: 'Outlined, Filled, Sharp, Two tone, Hand drawn, Riso, Pixel, Glass and Neon are transforms of Rounded.' },
+      { title: 'No player, small icons', body: 'Each icon is SVG plus a small Motion component. CI holds every style to a gzipped budget.' },
+      { title: 'One loop at a time', body: 'A shared loop coordinator lets only one looping icon play at once, so a page full of icons stays calm.' },
+      { title: 'Tokens from Figma', body: 'A generator turns the Figma token snapshot into CSS variables for light, dark and mobile.' },
+      { title: 'Pro never served in bulk', body: 'Pro icons appear as raster thumbnails rendered at build time, with one live preview at a time.' },
+      { title: 'More than React', body: 'Every component page also carries a SwiftUI snippet, and a React Native port has started.' }
+    ]
+  }
+};
 ---
 <BaseLayout title={`${project.title} — Kain Yin`} description={project.summary}>
   <article class:list={['case-page', `case-${project.slug}`]}>
@@ -48,10 +96,13 @@ const hasAgentView = project.sections.some((section) => section.label.toLowerCas
       </nav>
       <div>
         {project.sections.map((section, index) => (
-          <section class="case-section" id={`section-${index + 1}`} aria-labelledby={`section-title-${index + 1}`}>
+          <section class:list={['case-section', { 'has-detail-cards': Boolean(detailCards[project.slug]?.[section.label]) }]} data-section={section.label} id={`section-${index + 1}`} aria-labelledby={`section-title-${index + 1}`}>
             <p class="eyebrow">{section.label}</p><h2 id={`section-title-${index + 1}`}>{section.title}</h2>
             {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            <ProjectVisual section={section} accent={project.accent} />
+            {detailCards[project.slug]?.[section.label] && <div class="case-detail-cards">
+              {detailCards[project.slug][section.label].map((card) => <article class="case-detail-card">{card.image && <img class="case-detail-card-media" src={sitePath(`poulo-assets/posters/${card.image}`)} alt="" />}{card.title && <div class="case-detail-card-copy"><h3>{card.title}</h3><p>{card.body}</p></div>}</article>)}
+            </div>}
+            {!detailCards[project.slug]?.[section.label] && <ProjectVisual section={section} accent={project.accent} />}
           </section>
         ))}
         {!hasAgentView && !project.coverImage && <section class="case-section" id="agent-view" aria-labelledby="agent-view-title">
