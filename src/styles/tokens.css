@@ -18,8 +18,8 @@
   --color-danger: #c94d48;
   --color-info: #4c62c6;
 
-  --font-sans: "Inter", "TikTok Sans", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-display: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-sans: "TikTok Sans", "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-display: "TikTok Sans", "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
   --text-xs: clamp(.72rem, .68rem + .12vw, .78rem);

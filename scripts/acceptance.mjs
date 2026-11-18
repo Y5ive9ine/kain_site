@@ -24,6 +24,10 @@ const routes = [
   '/experiments/',
   '/now/',
   '/work/context-atlas/',
+  '/work/field-signals/',
+  '/work/decision-room/',
+  '/work/type-garden/',
+  '/work/calm-queue/',
   '/notes/portfolio-as-a-set-of-judgements/'
 ];
 
@@ -41,6 +45,32 @@ for (const route of routes) {
 }
 
 await desktop.goto(`${origin}/`, { waitUntil: 'networkidle' });
+const desktopHero = await desktop.locator('.home-hero').boundingBox();
+assert(desktopHero && Math.abs(desktopHero.height - 900) <= 1, 'desktop hero should be 900px tall');
+assert(await desktop.locator('.home-hero-copy h1').evaluate((node) => getComputedStyle(node).fontSize) === '42px', 'desktop hero heading should be 42px');
+const workMenu = desktop.locator('[data-menu="work"]');
+await workMenu.click();
+assert(await workMenu.getAttribute('aria-expanded') === 'true', 'desktop Work menu did not report expanded');
+assert(await desktop.locator('[data-popover="work"]').isVisible(), 'desktop Work popover did not open');
+await desktop.mouse.click(20, 420);
+assert(await desktop.locator('[data-popover="work"]').isHidden(), 'desktop Work popover did not close on outside click');
+const experimentsMenu = desktop.locator('[data-menu="experiments"]');
+await experimentsMenu.click();
+assert(await desktop.locator('[data-popover="experiments"]').isVisible(), 'desktop Experiments popover did not open');
+await desktop.mouse.click(20, 420);
+const aboutMenu = desktop.locator('.desktop-nav [data-chat]');
+await aboutMenu.click();
+assert(await desktop.locator('#chat-panel').isVisible(), 'desktop About panel did not open');
+await desktop.locator('#chat-panel [data-chat]').click();
+assert(await desktop.locator('#chat-panel').isHidden(), 'desktop About panel did not close');
+await desktop.locator('[data-hero-chat]').first().click();
+assert(await desktop.locator('[data-hero-chat-panel]').isVisible(), 'hero detail panel did not open');
+await desktop.locator('[data-hero-chat]').first().click();
+assert(await desktop.locator('[data-hero-chat-panel]').isHidden(), 'hero detail panel did not close');
+if (await desktop.locator('[data-cookie]').count()) {
+  await desktop.locator('[data-cookie-decline]').click();
+  assert(await desktop.locator('[data-cookie]').count() === 0, 'cookie banner did not close');
+}
 const initialVisibleCards = await desktop.locator('[data-case-card]:not([hidden])').count();
 await desktop.locator('[data-filter="SaaS"]').click();
 const filteredCards = await desktop.locator('[data-case-card]:not([hidden])').count();
@@ -57,9 +87,19 @@ await desktop.screenshot({ path: path.join(qaDir, 'home-desktop.png'), fullPage:
 const mobile = await context.newPage();
 await mobile.setViewportSize({ width: 390, height: 844 });
 await mobile.goto(`${origin}/`, { waitUntil: 'networkidle' });
+const mobileHero = await mobile.locator('.home-hero').boundingBox();
+assert(mobileHero && Math.abs(mobileHero.height - 940) <= 1, 'mobile hero should be 940px tall');
+assert(await mobile.locator('.home-hero-copy h1').evaluate((node) => getComputedStyle(node).fontSize) === '36px', 'mobile hero heading should be 36px');
 assert(await mobile.locator('.mobile-nav').isVisible(), 'mobile navigation should be visible');
 await mobile.locator('.mobile-nav summary').click();
 assert(await mobile.locator('.mobile-nav nav a').first().isVisible(), 'mobile menu should open');
+await mobile.waitForTimeout(50);
+assert(await mobile.locator('.mobile-nav summary').getAttribute('aria-expanded') === 'true', 'mobile menu did not report expanded');
+await mobile.locator('.mobile-nav [data-chat]').click();
+assert(await mobile.locator('#chat-panel').isVisible(), 'mobile About panel did not open');
+await mobile.locator('#chat-panel [data-chat]').click();
+assert(await mobile.locator('#chat-panel').isHidden(), 'mobile About panel did not close');
+await mobile.locator('.mobile-nav summary').click();
 const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
 assert(!mobileOverflow, 'homepage has horizontal overflow at mobile width');
 await mobile.locator('.mobile-nav [data-theme-toggle]').click();
@@ -80,6 +120,10 @@ for (const width of [375, 768, 1024, 1920]) {
   assert((await page.locator('h1').count()) === 1, `homepage should have one h1 at ${width}px`);
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   assert(!overflow, `homepage has horizontal overflow at ${width}px`);
+  const hero = await page.locator('.home-hero').boundingBox();
+  const expectedHeroHeight = width <= 520 ? 940 : width <= 800 ? 992 : 900;
+  assert(hero && Math.abs(hero.height - expectedHeroHeight) <= 1, `homepage hero has unexpected height at ${width}px`);
+  if (width === 768) await page.screenshot({ path: path.join(qaDir, 'home-tablet.png'), fullPage: true });
   await page.close();
 }
 
@@ -91,7 +135,7 @@ assert(rssText.includes('<rss version="2.0">') && rssText.includes('<item>'), 'R
 const sitemap = await context.request.get(`${origin}/sitemap.xml`);
 assert(sitemap.ok(), 'Sitemap endpoint failed');
 const sitemapText = await sitemap.text();
-assert(sitemapText.includes('<urlset') && sitemapText.includes('/work/context-atlas/'), 'Sitemap output is incomplete');
+assert(sitemapText.includes('<urlset') && sitemapText.includes('/work/context-atlas/') && sitemapText.includes('/work/calm-queue/'), 'Sitemap output is incomplete');
 
 const robots = await context.request.get(`${origin}/robots.txt`);
 assert(robots.ok(), 'robots.txt endpoint failed');

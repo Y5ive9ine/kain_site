@@ -68,6 +68,15 @@ const jsonLd = {
       <slot />
     </main>
     <SiteFooter />
+    <aside class="cookie-banner" data-cookie aria-label="Cookie preferences">
+      <strong>Cookies</strong>
+      <p>我只使用必要的存储来记住主题和菜单状态。</p>
+      <div>
+        <button type="button" data-cookie-decline>Decline</button>
+        <button type="button" class="dark" data-cookie-accept>Accept</button>
+      </div>
+    </aside>
+    <button class="chat-fab" type="button" data-chat aria-label="打开关于 Kain 的面板">◔</button>
     <script>
       const themeToggles = document.querySelectorAll('[data-theme-toggle]');
       const updateThemeLabel = () => {
@@ -84,6 +93,54 @@ const jsonLd = {
         updateThemeLabel();
       }));
       updateThemeLabel();
+
+      const popovers = [...document.querySelectorAll<HTMLElement>('[data-popover]')];
+      const menuButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-menu]')];
+      const chatPanel = document.querySelector<HTMLElement>('[data-chat-panel]');
+      const mobileNav = document.querySelector<HTMLDetailsElement>('[data-mobile-nav]');
+      const mobileSummary = document.querySelector<HTMLElement>('[data-mobile]');
+      const closePopovers = () => {
+        popovers.forEach((popover) => { popover.hidden = true; });
+        menuButtons.forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      };
+      menuButtons.forEach((button) => button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const target = document.querySelector<HTMLElement>(`[data-popover="${button.dataset.menu}"]`);
+        if (!target) return;
+        const shouldOpen = target.hidden;
+        closePopovers();
+        target.hidden = !shouldOpen;
+        button.setAttribute('aria-expanded', String(shouldOpen));
+      }));
+      document.querySelectorAll<HTMLElement>('[data-chat]').forEach((trigger) => trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (!chatPanel) return;
+        const shouldOpen = chatPanel.hidden;
+        chatPanel.hidden = !shouldOpen;
+        trigger.setAttribute('aria-expanded', String(shouldOpen));
+        closePopovers();
+        if (mobileNav) mobileNav.open = false;
+      }));
+      document.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.desktop-nav, .desktop-popover, .chat-panel, .chat-fab')) {
+          closePopovers();
+          if (chatPanel) chatPanel.hidden = true;
+        }
+      });
+      mobileNav?.addEventListener('toggle', () => {
+        mobileSummary?.setAttribute('aria-expanded', String(mobileNav.open));
+      });
+      document.querySelectorAll<HTMLAnchorElement>('[data-sheet] a').forEach((link) => link.addEventListener('click', () => {
+        if (mobileNav) mobileNav.open = false;
+      }));
+
+      const cookieBanner = document.querySelector<HTMLElement>('[data-cookie]');
+      if (localStorage.getItem('kain-cookie-choice')) cookieBanner?.remove();
+      document.querySelectorAll<HTMLButtonElement>('[data-cookie-accept], [data-cookie-decline]').forEach((button) => button.addEventListener('click', () => {
+        localStorage.setItem('kain-cookie-choice', button.dataset.cookieAccept !== undefined ? 'accepted' : 'declined');
+        cookieBanner?.remove();
+      }));
     </script>
   </body>
 </html>

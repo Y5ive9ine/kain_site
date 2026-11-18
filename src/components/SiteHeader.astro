@@ -4,6 +4,7 @@ interface Props {
 }
 
 import { sitePath } from '../utils/site';
+import { projects } from '../data/projects';
 
 const { eyebrow = 'KAIN / PERSONAL' } = Astro.props;
 ---
@@ -11,23 +12,56 @@ const { eyebrow = 'KAIN / PERSONAL' } = Astro.props;
   <div class="container header-inner">
     <a class="brand" href={sitePath()} aria-label="返回首页">{eyebrow}</a>
     <nav class="desktop-nav" aria-label="主导航">
-      <a href={sitePath('#work')}>Work</a>
-      <a href={sitePath('#experiments')}>Experiments</a>
-      <a href={sitePath('#about')}>About</a>
+      <a class="nav-item" href={sitePath()}>Home</a>
+      <button class="nav-item nav-menu-trigger" type="button" data-menu="work" aria-expanded="false" aria-controls="work-popover">Work <span aria-hidden="true">⌄</span></button>
+      <button class="nav-item nav-menu-trigger" type="button" data-menu="experiments" aria-expanded="false" aria-controls="experiments-popover">Experiments <span aria-hidden="true">⌄</span></button>
+      <button class="nav-item" type="button" data-chat aria-label="Hi, I’m Kain" aria-expanded="false" aria-controls="chat-panel">About</button>
       <a href={sitePath('#stack')}>Stack</a>
       <a class="header-cta" href="mailto:hello@example.com">Book a call ↗</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
     </nav>
-    <details class="mobile-nav">
-      <summary>Menu</summary>
-      <nav aria-label="移动端导航">
+    <details class="mobile-nav" data-mobile-nav>
+      <summary data-mobile aria-label="Open menu" aria-controls="mobile-sheet" aria-expanded="false">Menu</summary>
+      <nav id="mobile-sheet" data-sheet aria-label="移动端导航">
+        <a href={sitePath()}>Home</a>
         <a href={sitePath('#work')}>Work</a>
         <a href={sitePath('#experiments')}>Experiments</a>
-        <a href={sitePath('#about')}>About</a>
+        <button type="button" data-chat aria-label="Hi, I’m Kain" aria-expanded="false" aria-controls="chat-panel">About</button>
         <a href={sitePath('#stack')}>Stack</a>
         <a href="mailto:hello@example.com">Book a call ↗</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换主题">Dark</button>
       </nav>
     </details>
   </div>
+  <div class="desktop-popover" id="work-popover" data-popover="work" hidden>
+    <div class="popover-main">
+      <p class="eyebrow">CASE STUDIES</p>
+      <div class="work-list">
+        {projects.map((project) => <a href={sitePath(`work/${project.slug}/`)}><strong>{project.title}</strong><span>{project.eyebrow}</span></a>)}
+      </div>
+    </div>
+    <footer><span>{projects.length} case studies</span><a href={sitePath('#work')}>Browse all work ↗</a></footer>
+  </div>
+  <div class="desktop-popover experiments" id="experiments-popover" data-popover="experiments" hidden>
+    <div class="popover-main">
+      <p class="eyebrow">AI EXPERIMENTS</p>
+      <div class="work-list">
+        <a href={sitePath('#experiments')}><strong>Signal Notes</strong><span>Publishing system</span></a>
+        <a href={sitePath('#experiments')}><strong>Context Atlas</strong><span>Research mapping</span></a>
+        <a href={sitePath('#experiments')}><strong>Quiet Console</strong><span>Interface prototype</span></a>
+      </div>
+    </div>
+    <footer><span>Small things, shipped often</span><a href={sitePath('#experiments')}>See experiments ↗</a></footer>
+  </div>
+  <section class="chat-panel" id="chat-panel" data-chat-panel role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden>
+    <button class="chat-close" type="button" data-chat aria-label="关闭关于面板">×</button>
+    <strong id="chat-title">Ask about Kain</strong>
+    <small>回答来自个人作品和工作方式的摘要。</small>
+    <p>你好。我关注产品策略、交互设计、设计系统和真实代码。</p>
+    <div class="chat-chips">
+      <a href={sitePath('#about')}>我做什么？</a>
+      <a href={sitePath('#work')}>看看作品</a>
+      <a href={sitePath('#stack')}>使用哪些工具？</a>
+    </div>
+  </section>
 </header>

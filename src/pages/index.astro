@@ -13,20 +13,32 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
   <section class="home-hero" aria-labelledby="hero-title">
     <div class="container home-hero-inner">
       <div class="home-hero-copy">
-        <p class="eyebrow">Technical product designer · Front-end builder</p>
+        <p class="eyebrow">Technical product designer</p>
         <h1 id="hero-title">I design and build <span>useful systems.</span></h1>
         <p class="home-hero-description">从用户问题、产品结构到可用界面和真实代码，把复杂想法变成可以被理解、使用和继续成长的产品。</p>
         <div class="hero-actions">
-          <a class="button primary" href="#work">See my work <span aria-hidden="true">↓</span></a>
-          <a class="button secondary" href="mailto:hello@example.com">Book a call <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="#about">About me <span aria-hidden="true">↓</span></a>
+          <a class="button primary" href="#work">See my work <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <div class="hero-signal" aria-label="Current focus">
-        <div class="hero-signal-orbit orbit-one"></div>
-        <div class="hero-signal-orbit orbit-two"></div>
-        <div class="hero-signal-core">K / 26</div>
-        <p>Currently exploring</p>
-        <strong>Human-centred AI<br />and calm interfaces.</strong>
+      <div class="hero-avatar" aria-label="Abstract illustrated portrait of Kain">
+        <div class="hero-avatar-orbit orbit-one"></div>
+        <div class="hero-avatar-orbit orbit-two"></div>
+        <div class="avatar-hair"></div>
+        <div class="avatar-ear avatar-ear-left"></div>
+        <div class="avatar-ear avatar-ear-right"></div>
+        <div class="avatar-face"><i class="avatar-eye avatar-eye-left"></i><i class="avatar-eye avatar-eye-right"></i><b class="avatar-nose"></b><b class="avatar-mouth"></b></div>
+        <div class="avatar-neck"></div>
+        <div class="avatar-body"><span>K / 26</span></div>
+        <div class="avatar-spark spark-one"></div><div class="avatar-spark spark-two"></div>
+      </div>
+      <div class="hero-note">
+        <p class="eyebrow">Hi, I’m Kain</p>
+        <p>我在产品、设计系统和 AI 工具之间工作，喜欢把模糊问题整理成可以继续行动的界面。</p>
+        <button class="hero-trigger" type="button" data-hero-chat data-message="我会把研究、结构、交互和代码放在同一个工作流里。" aria-expanded="false">I design and build interfaces <span aria-hidden="true">↗</span></button>
+        <p>从用户发现到真实交付，让每一步都更容易理解和继续。</p>
+        <button class="hero-trigger" type="button" data-hero-chat data-message="产品设计和前端工程一起工作，能让决策更快被验证。" aria-expanded="false">Product design and front-end engineering <span aria-hidden="true">↗</span></button>
+        <div class="hero-chat" data-hero-chat-panel hidden role="status" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -148,4 +160,14 @@ const stackItems = ['Product strategy', 'User research', 'Interaction design', '
   }
   filterButtons.forEach((button) => button.addEventListener('click', () => setFilter(button.dataset.filter || 'All')));
   viewButtons.forEach((button) => button.addEventListener('click', () => { viewButtons.forEach((item) => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-checked', String(active)); }); list?.setAttribute('data-view', button.dataset.view || 'showcase'); }));
+  const chatTriggers = [...document.querySelectorAll<HTMLButtonElement>('[data-hero-chat]')];
+  const chatPanel = document.querySelector<HTMLElement>('[data-hero-chat-panel]');
+  chatTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    chatTriggers.forEach((item) => item.setAttribute('aria-expanded', String(item === trigger && !isOpen)));
+    if (chatPanel) {
+      chatPanel.hidden = isOpen;
+      chatPanel.textContent = isOpen ? '' : trigger.dataset.message || '';
+    }
+  }));
 </script>

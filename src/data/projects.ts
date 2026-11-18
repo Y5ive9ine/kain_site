@@ -139,6 +139,78 @@ export const projects: Project[] = [
         visual: 'network'
       }
     ]
+  },
+  {
+    slug: 'field-signals',
+    index: '04',
+    title: 'Field Signals',
+    eyebrow: 'Research workspace · Personal study',
+    description: '把访谈、观察和待验证的假设整理成可以继续追踪的研究脉络。',
+    summary: '一个面向产品团队的研究工作区概念，用轻量的标签和时间线让洞察更容易回到决策现场。',
+    role: 'Product design',
+    year: '2025',
+    team: 'Personal study',
+    tags: ['Research', 'SaaS', 'Prototype'],
+    accent: 'blue',
+    sections: [
+      { label: '01 / Context', title: '让观察回到真实场景', paragraphs: ['研究结论只有回到具体场景才会继续产生价值。Field Signals 用来源、时间和用户语句保留每个判断的上下文。'], visual: 'network' },
+      { label: '02 / Approach', title: '让证据和假设保持距离', paragraphs: ['证据、解释和下一步行动使用不同层级呈现，减少把推测误认为事实的风险。'], visual: 'console' },
+      { label: '03 / Reflection', title: '把下一次访问变得更轻', paragraphs: ['每个研究节点都留下一个可继续的问题，让团队可以从上次停下的位置重新开始。'], visual: 'notes' }
+    ]
+  },
+  {
+    slug: 'decision-room',
+    index: '05',
+    title: 'Decision Room',
+    eyebrow: 'Team systems · Personal study',
+    description: '让跨职能团队在同一张工作表面上确认优先级、取舍和下一步。',
+    summary: '一个把讨论、决定和行动连接起来的团队协作概念，适合节奏快又需要保留判断依据的小型团队。',
+    role: 'Product design',
+    year: '2025',
+    team: 'Personal study',
+    tags: ['Systems', 'SaaS', 'Prototype'],
+    accent: 'yellow',
+    sections: [
+      { label: '01 / Context', title: '把讨论变成可回看的决定', paragraphs: ['Decision Room 将讨论中的不同观点、决定条件和后续行动放在一起，减少重复解释。'], visual: 'console' },
+      { label: '02 / Approach', title: '让状态反映真实进度', paragraphs: ['状态标签只表达下一步需要什么动作，不把复杂的工作过程压缩成简单的完成与否。'], visual: 'network' },
+      { label: '03 / Reflection', title: '为不同意见留出空间', paragraphs: ['决定记录保留被放弃的路径，让团队能够理解取舍，也让未来的改变更容易发生。'], visual: 'notes' }
+    ]
+  },
+  {
+    slug: 'type-garden',
+    index: '06',
+    title: 'Type Garden',
+    eyebrow: 'Content system · Personal study',
+    description: '探索内容、组件和语气如何共同形成一个可以持续生长的发布系统。',
+    summary: '一个内容设计系统概念，用可复用的结构承载文章、实验和长期积累的片段。',
+    role: 'Design & front-end',
+    year: '2025',
+    team: 'Personal study',
+    tags: ['Publishing', 'Systems', 'Prototype'],
+    accent: 'coral',
+    sections: [
+      { label: '01 / Context', title: '内容结构先于页面装饰', paragraphs: ['Type Garden 从内容的最小单元开始，先定义标题、证据和下一步，再决定它们如何组合。'], visual: 'notes' },
+      { label: '02 / Approach', title: '让语气成为系统的一部分', paragraphs: ['设计令牌同时约束颜色、间距和文字节奏，让不同页面保持同一种可识别的声音。'], visual: 'console' },
+      { label: '03 / Reflection', title: '让半成品也有合适的位置', paragraphs: ['草稿和实验不必伪装成完成品，清楚的状态让读者知道如何继续阅读。'], visual: 'network' }
+    ]
+  },
+  {
+    slug: 'calm-queue',
+    index: '07',
+    title: 'Calm Queue',
+    eyebrow: 'Interaction pattern · Personal study',
+    description: '把持续到来的请求整理成可以逐步处理的安静队列。',
+    summary: '一个减少通知噪音的交互模式研究，用优先级、上下文和短暂的聚焦状态帮助人们回到当前任务。',
+    role: 'Interaction design',
+    year: '2024',
+    team: 'Personal study',
+    tags: ['Research', 'Publishing', 'Prototype'],
+    accent: 'yellow',
+    sections: [
+      { label: '01 / Context', title: '把紧急和重要分开', paragraphs: ['Calm Queue 先询问请求与当前目标的关系，再决定它应该进入今天、稍后或等待信息的队列。'], visual: 'network' },
+      { label: '02 / Approach', title: '用短暂聚焦减少切换', paragraphs: ['聚焦状态只保留完成当前动作需要的信息，让人可以在有限的时间里回到自己的节奏。'], visual: 'console' },
+      { label: '03 / Reflection', title: '让安静成为一种反馈', paragraphs: ['系统用清楚的状态和轻量的动效回应变化，避免用持续提醒制造更多压力。'], visual: 'notes' }
+    ]
   }
 ];
 
