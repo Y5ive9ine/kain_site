@@ -24,7 +24,7 @@ button { color: inherit; }
 
 .container { width: min(calc(100% - (var(--gutter) * 2)), var(--container-max)); margin-inline: auto; }
 .skip-link { position: fixed; z-index: 20; top: -100px; left: var(--gutter); padding: .6rem .9rem; border-radius: var(--radius-pill); background: var(--color-text); color: var(--color-bg); }
-.skip-link:focus { top: .75rem; }
+.skip-link:focus-visible { top: .75rem; }
 .eyebrow { margin: 0; color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: .08em; text-transform: uppercase; }
 .muted { color: var(--color-text-muted); }
 
